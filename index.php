@@ -13,8 +13,16 @@ error_reporting(E_ALL);
  /**
   * include the init.php file 
   */
- include 'core/init.php';
+include 'application/init.php';
 
+//autoload("application\Router");
+use webmvc\application\Router;
+
+/*** load the router ***/
+$registry->router = new Router($registry);
+/*** set the path to the controllers directory ***/
+//$router­>setPath(__SITE_PATH . 'controller');
+ 
 ?>
 
 <!DOCTYPE html>
