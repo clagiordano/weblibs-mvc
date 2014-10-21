@@ -14,6 +14,7 @@ class Registry {
      * @the vars array
      * @access private
      */
+
     private $vars = array();
 
     /**
@@ -23,8 +24,7 @@ class Registry {
      * @param mixed $value
      * @return void
      */
-    public function __set($index, $value) 
-    {
+    public function __set($index, $value) {
         $this->vars[$index] = $value;
     }
 
@@ -34,8 +34,8 @@ class Registry {
      * @param mixed $index
      * @return mixed
      */
-    public function __get($index) 
-    {
+    public function __get($index) {
         return $this->vars[$index];
     }
+
 }

@@ -21,7 +21,7 @@ use webmvc\application\Router;
 /*** load the router ***/
 $registry->router = new Router($registry);
 /*** set the path to the controllers directory ***/
-//$router­>setPath(__SITE_PATH . 'controller');
+//$registry->router­>setPath(__SITE_PATH . 'controller');
  
 ?>
 
@@ -32,7 +32,6 @@ $registry->router = new Router($registry);
         <title></title>
     </head>
     <body>
-        <?php
-        ?>
+        <?php ?>
     </body>
 </html>
