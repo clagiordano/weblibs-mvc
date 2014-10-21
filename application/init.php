@@ -1,17 +1,18 @@
 <?php
+
  /*** include the controller class ***/
- include __SITE_PATH . '/core/' . 'controller_base.class.php';
+ include __SITE_PATH . '/application/' . 'Controller.php';
  /*** include the registry class ***/
- include __SITE_PATH . '/core/' . 'Registry.php';
+ include __SITE_PATH . '/application/' . 'Registry.php';
  /*** include the router class ***/
- include __SITE_PATH . '/core/' . 'router.class.php';
+ include __SITE_PATH . '/application/' . 'Router.php';
  /*** include the template class ***/
- include __SITE_PATH . '/core/' . 'template.class.php';
+ include __SITE_PATH . '/application/' . 'Template.php';
  
  /*** auto load model classes ***/
 function __autoload($class_name) {
     $filename = strtolower($class_name) . '.php';
-    $file = __SITE_PATH . '/model/' . $filename;
+    $file = __SITE_PATH . '/models/' . $filename;
     if (file_exists($file) == false) {
         return false;
     }

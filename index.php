@@ -13,7 +13,7 @@ error_reporting(E_ALL);
  /**
   * include the init.php file 
   */
- include 'includes/init.php';
+ include 'core/init.php';
 
 ?>
 
