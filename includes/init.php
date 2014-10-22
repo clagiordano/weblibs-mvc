@@ -1,6 +1,11 @@
 <?php
 
-function __autoload($className) // PSR
+/**
+ * PSR automatic autoload function
+ * 
+ * @param string $className
+ */
+function __autoload($className)
 {
     $className = ltrim($className, '\\');
     $fileName  = '';
@@ -15,21 +20,6 @@ function __autoload($className) // PSR
     print "psr autoload: $fileName<br />";
     require "../$fileName";
 }
-
-//function __autoload($class_name) 
-//{
-//    print "__autoload $class_name<br />";
-//    
-//    //$filename = strtolower($class_name) . '.php';
-//    //$file = __SITE_PATH . '/model/' . $filename;
-//    $file = "../" . $class_name . ".php";
-//    print "__autoload $file<br />";
-//    
-//    if (file_exists($file) == false) {
-//        return false;
-//    }
-//    include ($file);
-//}
 
 //autoload("application\Controller");
 //autoload("application\Registry");
