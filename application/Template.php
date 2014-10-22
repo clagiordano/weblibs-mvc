@@ -56,7 +56,7 @@ class Template {
 
         if (file_exists($path) == false) {
             throw new \Exception('Template not found in ' . $path);
-            return false;
+//            return false;
         }
 
         // Load variables
