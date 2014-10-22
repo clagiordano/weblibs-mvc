@@ -15,8 +15,14 @@ define ('__SITE_PATH', $site_path);
  */
 include 'includes/init.php';
 
-//autoload("application\Router");
+use webmvc\application\Registry;
 use webmvc\application\Router;
+use webmvc\application\Template;
+
+/**
+ * Create a new registry object 
+ **/
+$registry = new Registry();
 
 /**
  * load the router
@@ -27,6 +33,16 @@ $registry->router = new Router($registry);
  * set the path to the controllers directory 
  */
  $registry->router->setPath(__SITE_PATH . '/controllers');
+ 
+/**
+ * load up the template 
+ */
+$registry->template = new Template($registry);
+
+/**
+ * load the controller 
+ */
+$registry->router->loader();
  
 echo "<pre>\$_GET['rt']: ";
     print_r(filter_input(INPUT_GET, 'rt'));

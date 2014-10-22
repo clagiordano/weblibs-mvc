@@ -38,7 +38,7 @@ class Router {
     }
 
     /**
-     * @set controller directory path
+     * set controller directory path
      *
      * @param string $path
      * @return void
@@ -59,8 +59,8 @@ class Router {
     }
 
     /**
-     *
-     * @load the controller
+     * load the controller
+     * 
      * @access public
      * @return void
      */
@@ -69,45 +69,45 @@ class Router {
         /**
          * check the route 
          */
-        $this­>getController();
+        $this->getController();
         
         /**
          * if the file is not there diaf 
          */
-        if (is_readable($this­>file) == false) {
-            echo $this­>file;
-            die('404 Not Found');
+        if (is_readable($this->file) == false) {
+            $this->file       = $this->path . '/error404.php';
+            $this->controller = 'error404';
         }
         
         /** 
          * include the controller 
          */
-        include $this­>file;
+        include $this->file;
         
         /**
          * a new controller class instance 
          */
-        $class = $this­>controller . 'Controller_';
-        $controller = new $class($this­>registry);
+        $class      = $this->controller . 'Controller_';
+        $controller = new $class($this->registry);
         
         /** 
          * check if the action is callable 
          */
-        if (is_callable(array($controller, $this­>action)) == false) {
+        if (is_callable(array($controller, $this->action)) == false) {
             $action = 'index';
         } else {
-            $action = $this­>action;
+            $action = $this->action;
         }
         
         /**
          * run the action 
          */
-        $controller­>$action();
+        $controller->$action();
     }
 
     /**
      *
-     * @get the controller
+     * get the controller
      *
      * @access private
      * @return void
@@ -132,20 +132,20 @@ class Router {
             }
         }
         
-        if (empty($this­>controller)) {
+        if (empty($this->controller)) {
             $this->controller = 'index';
         }
         
         /** 
          * Get action 
          */
-        if (empty($this­>action)) {
+        if (empty($this->action)) {
             $this->action = 'index';
         }
         
         /**
          * set the file path
          */
-        $this->file = $this->path . '/' . $this­>controller . '.php';
+        $this->file = $this->path . '/' . $this->controller . '.php';
     }
 }
