@@ -87,7 +87,7 @@ class Router {
         /**
          * a new controller class instance 
          */
-        $class      = $this->controller . 'Controller_';
+        $class      = $this->controller . 'Controller';
         $controller = new $class($this->registry);
         
         /** 
@@ -146,6 +146,6 @@ class Router {
         /**
          * set the file path
          */
-        $this->file = $this->path . '/' . $this->controller . '.php';
+        $this->file = $this->path . '/' . $this->controller . 'Controller.php';
     }
 }

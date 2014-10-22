@@ -1,13 +1,12 @@
 <?php
 
-Class error404Controller Extends baseController {
+use webmvc\application\Controller;
 
-public function index() 
-{
-        $this->registry->template->blog_heading = 'This is the 404';
+class error404Controller Extends Controller {
+
+    public function index() 
+    {
+        $this->registry->template->error_heading = 'This is the 404';
         $this->registry->template->show('error404');
+    }
 }
-
-
-}
-?>
