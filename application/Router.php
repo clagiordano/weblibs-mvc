@@ -6,16 +6,15 @@ namespace webmvc\application;
  * The router class is responsible for loading up the correct controller. 
  * It does nothing else. The value of the controller comes from the URL.
  *
- * @author claudio
+ * @author Claudio Giordano <claudio.giordano@autistici.org>
  */
 class Router {
-    /*
+    /**
      * @the registry
      */
-
     private $registry;
 
-    /*
+    /**
      * @the controller path
      */
     private $path;

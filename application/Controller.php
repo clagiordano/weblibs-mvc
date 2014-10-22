@@ -11,16 +11,16 @@ namespace webmvc\application;
  * included in the base controller which means all controller classes that 
  * extend from it must have an index() method themselves.
  *
- * @author claudio
+ * @author Claudio Giordano <claudio.giordano@autistici.org>
  */
 abstract class Controller {
-    /*
+    /**
      * @registry object
      */
-
     protected $registry;
 
-    function __construct($registry) {
+    function __construct($registry) 
+    {
         $this->registry = $registry;
     }
 

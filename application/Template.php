@@ -10,17 +10,16 @@ namespace webmvc\application;
  * This is the sort of task it is designed for and makes an efficient 
  * templating language. The template files belong in the views directory.
  *
- * @author claudio
+ * @author Claudio Giordano <claudio.giordano@autistici.org>
  */
 class Template {
-    /*
+    /**
      * @the registry
      * @access private
      */
-
     private $registry;
 
-    /*
+    /**
      * @Variables array
      * @access private
      */
@@ -32,7 +31,8 @@ class Template {
      * @access public
      * @return void
      */
-    function __construct($registry) {
+    function __construct($registry) 
+    {
         $this->registry = $registry;
     }
 
@@ -43,11 +43,13 @@ class Template {
      * @param mixed $value
      * @return void
      */
-    public function __set($index, $value) {
+    public function __set($index, $value) 
+    {
         $this->vars[$index] = $value;
     }
 
-    function show($name) {
+    function show($name) 
+    {
         $path = __SITE_PATH . '/views' . '/' . $name . '.php';
 
         if (file_exists($path) == false) {
@@ -62,5 +64,4 @@ class Template {
 
         include ($path);
     }
-
 }
