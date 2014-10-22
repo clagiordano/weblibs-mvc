@@ -2,6 +2,8 @@
 
 namespace webmvc\application;
 
+use webmvc\application\Registry;
+
 /**
  * The Contoller is the C in MVC. 
  * The base controller is a simple abstract class that defines the
@@ -19,7 +21,7 @@ abstract class Controller {
      */
     protected $registry;
 
-    function __construct($registry) 
+    function __construct(Registry $registry) 
     {
         $this->registry = $registry;
     }

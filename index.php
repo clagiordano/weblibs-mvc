@@ -26,7 +26,7 @@ $registry->router = new Router($registry);
 /**
  * set the path to the controllers directory 
  */
-//$registry->router­>setPath(__SITE_PATH . 'controller');
+ $registry->router->setPath(__SITE_PATH . '/controllers');
  
 echo "<pre>\$_GET['rt']: ";
     print_r(filter_input(INPUT_GET, 'rt'));

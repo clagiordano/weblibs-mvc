@@ -2,6 +2,8 @@
 
 namespace webmvc\application;
 
+use webmvc\application\Registry;
+
 /**
  * The templates themselves are basically HTML files with a little PHP embedded. 
  * Do not let the separation Nazi's try to tell you that you need to have full 
@@ -31,7 +33,7 @@ class Template {
      * @access public
      * @return void
      */
-    function __construct($registry) 
+    function __construct(Registry $registry) 
     {
         $this->registry = $registry;
     }

@@ -2,9 +2,13 @@
 
 namespace webmvc\application;
 
+use webmvc\application\Registry;
+
 /**
  * The router class is responsible for loading up the correct controller. 
  * It does nothing else. The value of the controller comes from the URL.
+ * 
+ * Dynamic routing object
  *
  * @author Claudio Giordano <claudio.giordano@autistici.org>
  */
@@ -24,7 +28,11 @@ class Router {
     public $controller;
     public $action;
 
-    function __construct($registry) 
+    /**
+     * 
+     * @param Registry $registry
+     */
+    function __construct(Registry $registry) 
     {
         $this->registry = $registry;
     }
@@ -41,7 +49,7 @@ class Router {
          * check if path is a directory
          */
         if (is_dir($path) == false) {
-            throw new Exception('Invalid controller path: `' . $path . '`');
+            throw new \Exception('Invalid controller path: `' . $path . '`');
         }
 
         /**
