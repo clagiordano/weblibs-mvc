@@ -2,7 +2,7 @@
 
 /**
  * PSR automatic autoload function
- * 
+ *
  * @param string $className
  */
 function __autoload($className)
@@ -16,7 +16,7 @@ function __autoload($className)
         $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
     }
     $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-    
+
     print "psr autoload: $fileName<br />";
     require "../$fileName";
 }

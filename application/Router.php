@@ -117,7 +117,8 @@ class Router {
         /**
          * get the route from the url 
          */
-        $route = (empty($_GET['rt'])) ? '' : $_GET['rt'];
+        //$route = (empty($_GET['rt'])) ? '' : $_GET['rt'];
+        $route = filter_input(INPUT_GET, 'rt', FILTER_SANITIZE_URL);
         
         if (empty($route)) {
             $route = 'index';
