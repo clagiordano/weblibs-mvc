@@ -20,11 +20,13 @@ class Router {
      */
     private $path;
     private $args = array();
+    
     public $file;
     public $controller;
     public $action;
 
-    function __construct($registry) {
+    function __construct($registry) 
+    {
         $this->registry = $registry;
     }
 
@@ -34,7 +36,8 @@ class Router {
      * @param string $path
      * @return void
      */
-    function setPath($path) {
+    function setPath($path) 
+    {
         /**
          * check if path is a directory
          */
@@ -42,7 +45,9 @@ class Router {
             throw new Exception('Invalid controller path: `' . $path . '`');
         }
 
-        /*         * * set the path ** */
+        /**
+         * set the path 
+         */
         $this->path = $path;
     }
 
@@ -51,29 +56,46 @@ class Router {
      * @load the controller
      * @access public
      * @return void
-     *
      */
-    public function loader() {
-        /*         * * check the route ** */
-        $this­ > getController();
-        /*         * * if the file is not there diaf ** */
-        if (is_readable($this­ > file) == false) {
-            echo $this­ > file;
+    public function loader() 
+    {
+        /**
+         * check the route 
+         */
+        $this­>getController();
+        
+        /**
+         * if the file is not there diaf 
+         */
+        if (is_readable($this­>file) == false) {
+            echo $this­>file;
             die('404 Not Found');
         }
-        /*         * * include the controller ** */
-        include $this­ > file;
-        /*         * * a new controller class instance ** */
-        $class = $this­ > controller . 'Controller_';
-        $controller = new $class($this­ > registry);
-        /*         * * check if the action is callable ** */
-        if (is_callable(array($controller, $this­ > action)) == false) {
+        
+        /** 
+         * include the controller 
+         */
+        include $this­>file;
+        
+        /**
+         * a new controller class instance 
+         */
+        $class = $this­>controller . 'Controller_';
+        $controller = new $class($this­>registry);
+        
+        /** 
+         * check if the action is callable 
+         */
+        if (is_callable(array($controller, $this­>action)) == false) {
             $action = 'index';
         } else {
-            $action = $this­ > action;
+            $action = $this­>action;
         }
-        /*         * * run the action ** */
-        $controller­ > $action();
+        
+        /**
+         * run the action 
+         */
+        $controller­>$action();
     }
 
     /**
@@ -82,30 +104,41 @@ class Router {
      *
      * @access private
      * @return void
-     *
      */
-    private function getController() {
-        /*         * * get the route from the url ** */
+    private function getController() 
+    {
+        /**
+         * get the route from the url 
+         */
         $route = (empty($_GET['rt'])) ? '' : $_GET['rt'];
+        
         if (empty($route)) {
             $route = 'index';
         } else {
-            /*             * * get the parts of the route ** */
+            /** 
+             * get the parts of the route 
+             */
             $parts = explode('/', $route);
             $this->controller = $parts[0];
             if (isset($parts[1])) {
                 $this->action = $parts[1];
             }
         }
-        if (empty($this­ > controller)) {
+        
+        if (empty($this­>controller)) {
             $this->controller = 'index';
         }
-        /*         * * Get action ** */
-        if (empty($this­ > action)) {
+        
+        /** 
+         * Get action 
+         */
+        if (empty($this­>action)) {
             $this->action = 'index';
         }
-        /*         * * set the file path ** */
-        $this->file = $this->path . '/' . $this­ > controller . '.php';
+        
+        /**
+         * set the file path
+         */
+        $this->file = $this->path . '/' . $this­>controller . '.php';
     }
-
 }
