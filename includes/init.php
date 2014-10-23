@@ -17,6 +17,6 @@ function __autoload($className)
     }
     $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
 
-    print "psr autoload: $fileName<br />";
+    //print "psr autoload: $fileName<br />";
     require "../$fileName";
 }
