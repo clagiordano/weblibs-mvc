@@ -44,9 +44,9 @@ $registry->template = new Template($registry);
  */
 $registry->router->loader();
  
-echo "<pre>\$_GET['rt']: ";
-    print_r(filter_input(INPUT_GET, 'rt'));
-echo "</pre>";
+//echo "<pre>\$_GET['rt']: ";
+//    print_r(filter_input(INPUT_GET, 'rt'));
+//echo "</pre>";
 ?>
 
 <!DOCTYPE html>
