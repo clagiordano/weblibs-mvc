@@ -5,5 +5,11 @@
 			"name": "Claudio Giordano",
 			"email": "claudio.giordano@autistici.org"
 		}
-    ]
+    ],  
+    "extra": {
+        "installer-paths": {
+            "/": ["vendor/package"]
+        }
+    }   
+
 }
