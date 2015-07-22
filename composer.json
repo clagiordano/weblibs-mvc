@@ -5,11 +5,13 @@
 			"name": "Claudio Giordano",
 			"email": "claudio.giordano@autistici.org"
 		}
-    ],  
+    ],
+    "require": {
+        "composer/installers": "~1.0"
+    },  
     "extra": {
         "installer-paths": {
             "/": ["vendor/package"]
         }
-    }   
-
+    }
 }
