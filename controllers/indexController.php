@@ -1,6 +1,6 @@
 <?php
 
-use webmvc\application\Controller;
+use clagiordano\webmvc\application\Controller;
 
 /**
  * Description of indexController

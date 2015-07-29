@@ -1,8 +1,8 @@
 <?php
 
-namespace webmvc\application;
+namespace clagiordano\webmvc\application;
 
-use webmvc\application\Registry;
+use clagiordano\webmvc\application\Registry;
 
 /**
  * The templates themselves are basically HTML files with a little PHP embedded.

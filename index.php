@@ -1,5 +1,7 @@
 <?php
 
+namespace clagiordano\webmvc;
+
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -15,9 +17,9 @@ define ('__SITE_PATH', $site_path);
  */
 include 'includes/init.php';
 
-use webmvc\application\Registry;
-use webmvc\application\Router;
-use webmvc\application\Template;
+use clagiordano\webmvc\application\Registry;
+use clagiordano\webmvc\application\Router;
+use clagiordano\webmvc\application\Template;
 
 /**
  * Create a new registry object

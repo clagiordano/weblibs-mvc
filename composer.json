@@ -6,8 +6,10 @@
 			"email": "claudio.giordano@autistici.org"
 		}
     ],
-    "require": {
-        "composer/installers": "~1.0"
-    },
-    "target-dir": "/"
+    "autoload": {
+        "psr-4": {
+            "clagiordano\\webmvc\\": "application"
+        }
+    }
+
 }

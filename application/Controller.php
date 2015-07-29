@@ -1,8 +1,8 @@
 <?php
 
-namespace webmvc\application;
+namespace clagiordano\webmvc\application;
 
-use webmvc\application\Registry;
+use clagiordano\webmvc\application\Registry;
 
 /**
  * The Contoller is the C in MVC.
