@@ -5,16 +5,17 @@ namespace webmvc\application;
 use webmvc\application\Registry;
 
 /**
- * The templates themselves are basically HTML files with a little PHP embedded. 
- * Do not let the separation Nazi's try to tell you that you need to have full 
+ * The templates themselves are basically HTML files with a little PHP embedded.
+ * Do not let the separation Nazi's try to tell you that you need to have full
  * seperation of HTML and PHP.
- * Remember, PHP is an embeddable scripting language. 
- * This is the sort of task it is designed for and makes an efficient 
+ * Remember, PHP is an embeddable scripting language.
+ * This is the sort of task it is designed for and makes an efficient
  * templating language. The template files belong in the views directory.
  *
  * @author Claudio Giordano <claudio.giordano@autistici.org>
  */
-class Template {
+class Template
+{
     /**
      * @the registry
      * @access private
@@ -33,7 +34,7 @@ class Template {
      * @access public
      * @return void
      */
-    function __construct(Registry $registry) 
+    function __construct(Registry $registry)
     {
         $this->registry = $registry;
     }
@@ -45,12 +46,12 @@ class Template {
      * @param mixed $value
      * @return void
      */
-    public function __set($index, $value) 
+    public function __set($index, $value)
     {
         $this->vars[$index] = $value;
     }
 
-    function show($name) 
+    function show($name)
     {
         $path = __SITE_PATH . '/views' . '/' . $name . '.php';
 
@@ -66,4 +67,5 @@ class Template {
 
         include ($path);
     }
+
 }
