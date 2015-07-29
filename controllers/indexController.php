@@ -8,7 +8,7 @@ use webmvc\application\Controller;
  * @author claudio
  */
 class indexController Extends Controller {
-    public function index() 
+    public function index()
     {
         /** set a template variable */
         $this->registry->template->welcome = 'Welcome to WEBMVC';

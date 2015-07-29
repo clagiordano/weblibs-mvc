@@ -114,7 +114,6 @@ class Router
      */
     private function getController()
     {
-        echo __METHOD__;
         /**
          * get the route from the url
          */

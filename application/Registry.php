@@ -8,7 +8,7 @@ namespace webmvc\application;
  * By passing the registry object to the controllers that need them,
  * we avoid pollution of the global namespace and render our variables safe.
  * We need to be able to set registry variables and to get them.
- * 
+ *
  * @author Claudio Giordano <claudio.giordano@autistici.org>
  */
 class Registry
