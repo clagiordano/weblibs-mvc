@@ -1,7 +1,5 @@
 <?php
 
-
-
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -11,6 +9,11 @@ error_reporting(E_ALL);
  */
 $site_path = realpath(dirname(__FILE__));
 define ('__SITE_PATH', $site_path);
+
+$URI  = filter_input(INPUT_SERVER, 'REQUEST_SCHEME') . "://";
+$URI .= filter_input(INPUT_SERVER, 'HTTP_HOST');
+$URI .= dirname(filter_input(INPUT_SERVER, 'SCRIPT_NAME')) . "/";
+define ('__SITE_WEB_PATH', $URI);
 
 /**
  * include the init.php file
@@ -34,7 +37,7 @@ $registry->router = new Router($registry);
 /**
  * set the path to the controllers directory
  */
- $registry->router->setPath(__SITE_PATH . '/controllers');
+$registry->router->setPath(__SITE_PATH . '/controllers');
 
 /**
  * load up the template
@@ -49,15 +52,4 @@ $registry->router->loader();
 //echo "<pre>\$_GET['rt']: ";
 //    print_r(filter_input(INPUT_GET, 'rt'));
 //echo "</pre>";
-?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php ?>
-    </body>
-</html>
