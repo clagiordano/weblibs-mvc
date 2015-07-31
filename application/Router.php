@@ -141,12 +141,14 @@ class Router
                 array_shift($parts);
             }
 
-            // get optional args
-            echo "<pre>";
-            print_r($parts);
-            echo "</pre>";
-            
+            /**
+             * Get optional residual args
+             */
             if (count($parts) > 0) {
+                echo "<pre>";
+                    print_r($parts);
+                echo "</pre>";
+            
                 $this->args = $this->parseArgs($parts);
             }
         }
@@ -175,7 +177,7 @@ class Router
      */
     private function parseArgs($argsList = [])
     {
-        if ((count($argsList) % 2)) {
+        if ((count($argsList) % 2) == 0) {
             echo "pari";
         } else {
             echo "dispari";
