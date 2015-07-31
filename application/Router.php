@@ -102,7 +102,7 @@ class Router
         /**
          * run the action
          */
-        $controller->$action();
+        $controller->$action($this->args);
     }
 
     /**
@@ -127,15 +127,15 @@ class Router
              */
             $parts            = explode('/', $route);
             $this->controller = $parts[0];
-            echo "[Debug]: route: $route <br />";
-            echo "[Debug]: controller: {$this->controller} <br />";
+            //~ echo "[Debug]: route: $route <br />";
+            //~ echo "[Debug]: controller: {$this->controller} <br />";
             
             // Shift element off the beginning of array
             array_shift($parts);
 
             if (isset($parts[0])) {
                 $this->action = $parts[0];
-                echo "[Debug]: action: {$this->action} <br />";
+                //~ echo "[Debug]: action: {$this->action} <br />";
 
                 // Shift element off the beginning of array
                 array_shift($parts);
@@ -145,11 +145,7 @@ class Router
              * Get optional residual args
              */
             if (count($parts) > 0) {
-                echo "<pre>";
-                    print_r($parts);
-                echo "</pre>";
-            
-                $this->args = $this->parseArgs($parts);
+                $this->parseArgs($parts);
             }
         }
 
@@ -178,9 +174,19 @@ class Router
     private function parseArgs($argsList = [])
     {
         if ((count($argsList) % 2) == 0) {
-            echo "pari";
+            /**
+             * if the arguments are odd, I consider them as key => value pairs
+             */
+            for ($i = 0; $i < count($argsList); $i++)
+            {
+                $this->args[$argsList[$i]] = $argsList[($i + 1)];
+                $i++;
+            }
         } else {
-            echo "dispari";
+            /**
+             * else I consider them as arguments list
+             */
+            $this->args = $argsList;
         }
     }
 
