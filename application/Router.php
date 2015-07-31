@@ -100,7 +100,8 @@ class Router
         }
 
         /**
-         * run the action
+         * run the action and supply optional args to called action 
+         * as arguments if present.
          */
         $controller->$action($this->args);
     }
