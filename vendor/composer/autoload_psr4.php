@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'clagiordano\\webmvc' => array($baseDir . '/application'),
+    'clagiordano\\webmvc\\' => array($baseDir . '/application'),
 );
