@@ -27,12 +27,12 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=5
+current_page=4
 FILE_NAME_0=245;JSON;0;EUTF-8;0;1;0;%2Fhome%2Fclaudio%2FDropbox%2FProgetti%2Fwebmvc%2Fcomposer.json;0;4
 FILE_NAME_1=0;PHP;0;EUTF-8;0;1;0;%2Fhome%2Fclaudio%2FDropbox%2FProgetti%2Fwebmvc%2Fincludes%2Finit.php;0;4
 FILE_NAME_2=0;PHP;0;EUTF-8;0;1;0;%2Fhome%2Fclaudio%2FDropbox%2FProgetti%2Fwebmvc%2Fapplication%2FController.php;0;4
 FILE_NAME_3=0;PHP;0;EUTF-8;0;1;0;%2Fhome%2Fclaudio%2FDropbox%2FProgetti%2Fwebmvc%2Fapplication%2FRegistry.php;0;4
-FILE_NAME_4=0;PHP;0;EUTF-8;0;1;0;%2Fhome%2Fclaudio%2FDropbox%2FProgetti%2Fwebmvc%2Fapplication%2FRouter.php;0;4
+FILE_NAME_4=2198;PHP;0;EUTF-8;0;1;0;%2Fhome%2Fclaudio%2FDropbox%2FProgetti%2Fwebmvc%2Fapplication%2FRouter.php;0;4
 FILE_NAME_5=0;PHP;0;EUTF-8;0;1;0;%2Fhome%2Fclaudio%2FDropbox%2FProgetti%2Fwebmvc%2Fapplication%2FTemplate.php;0;4
 FILE_NAME_6=0;PHP;0;EUTF-8;0;1;0;%2Fhome%2Fclaudio%2FDropbox%2FProgetti%2Fwebmvc%2Fcontrollers%2FindexController.php;0;4
 FILE_NAME_7=534;PHP;0;EUTF-8;0;1;0;%2Fhome%2Fclaudio%2FDropbox%2FProgetti%2Fwebmvc%2Findex.php;0;4

@@ -174,6 +174,14 @@ class Router
      */
     private function parseArgs($argsList = [])
     {
+        /**
+         * Check last args and unset if empty
+         */
+        if (trim($argsList[count($argsList) - 1]) == "") {
+            // Invalid arg detected and removed
+            unset($argsList[count($argsList) - 1]);
+        } 
+         
         if ((count($argsList) % 2) == 0) {
             /**
              * if the arguments are odd, I consider them as key => value pairs
