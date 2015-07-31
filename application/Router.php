@@ -127,21 +127,25 @@ class Router
              */
             $parts            = explode('/', $route);
             $this->controller = $parts[0];
-
+            echo "[Debug]: route: $route <br />";
+            echo "[Debug]: controller: {$this->controller} <br />";
+            
             // Shift element off the beginning of array
             array_shift($parts);
 
-            if (isset($parts[1])) {
-                $this->action = $parts[1];
+            if (isset($parts[0])) {
+                $this->action = $parts[0];
+                echo "[Debug]: action: {$this->action} <br />";
 
                 // Shift element off the beginning of array
                 array_shift($parts);
             }
 
             // get optional args
-            echo "<pre>$route";
+            echo "<pre>";
             print_r($parts);
             echo "</pre>";
+            
             if (count($parts) > 0) {
                 $this->args = $this->parseArgs($parts);
             }
