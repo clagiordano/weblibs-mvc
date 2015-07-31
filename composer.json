@@ -1,15 +1,14 @@
 {
     "name": "clagiordano/webmvc",
     "authors": [
-		{
-			"name": "Claudio Giordano",
-			"email": "claudio.giordano@autistici.org"
-		}
+        {
+            "name": "Claudio Giordano",
+            "email": "claudio.giordano@autistici.org"
+        }
     ],
     "autoload": {
         "psr-4": {
-            "clagiordano\\webmvc\\": "/"
+            "clagiordano\\webmvc": "application"
         }
     }
-
 }
