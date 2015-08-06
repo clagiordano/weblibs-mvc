@@ -100,7 +100,7 @@ class Router
         }
 
         /**
-         * run the action and supply optional args to called action 
+         * run the action and supply optional args to called action
          * as arguments if present.
          */
         $controller->$action($this->args);
@@ -180,14 +180,13 @@ class Router
         if (trim($argsList[count($argsList) - 1]) == "") {
             // Invalid arg detected and removed
             unset($argsList[count($argsList) - 1]);
-        } 
+        }
          
         if ((count($argsList) % 2) == 0) {
             /**
              * if the arguments are odd, I consider them as key => value pairs
              */
-            for ($i = 0; $i < count($argsList); $i++)
-            {
+            for ($i = 0; $i < count($argsList); $i++) {
                 $this->args[$argsList[$i]] = $argsList[($i + 1)];
                 $i++;
             }
@@ -198,5 +197,4 @@ class Router
             $this->args = $argsList;
         }
     }
-
 }

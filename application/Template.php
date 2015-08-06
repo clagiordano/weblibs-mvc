@@ -67,5 +67,4 @@ class Template
 
         include ($path);
     }
-
 }

@@ -2,7 +2,8 @@
 
 use clagiordano\webmvc\application\Controller;
 
-class error404Controller Extends Controller {
+class error404Controller extends Controller
+{
 
     public function index()
     {

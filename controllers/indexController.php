@@ -7,7 +7,8 @@ use clagiordano\webmvc\application\Controller;
  *
  * @author claudio
  */
-class indexController Extends Controller {
+class indexController extends Controller
+{
     public function index()
     {
         /** set a template variable */
