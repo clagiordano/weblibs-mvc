@@ -54,9 +54,8 @@ class Template
     {
         $path = __SITE_PATH . '/views' . '/' . $name . '.php';
 
-        if (file_exists($path) == false) {
+        if (file_exists($path) === false) {
             throw new \Exception('Template not found in ' . $path);
-//            return false;
         }
 
         // Load variables

@@ -48,7 +48,7 @@ class Router
         /**
          * check if path is a directory
          */
-        if (is_dir($path) == false) {
+        if (is_dir($path) === false) {
             throw new \Exception('Invalid controller path: `' . $path . '`');
         }
 
@@ -74,7 +74,7 @@ class Router
         /**
          * if the file is not there diaf
          */
-        if (is_readable($this->file) == false) {
+        if (is_readable($this->file) === false) {
             $this->file       = $this->path . '/error404.php';
             $this->controller = 'error404';
         }
@@ -93,7 +93,7 @@ class Router
         /**
          * check if the action is callable
          */
-        if (is_callable(array($controller, $this->action)) == false) {
+        if (is_callable([$controller, $this->action]) === false) {
             $action = 'index';
         } else {
             $action = $this->action;
