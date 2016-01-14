@@ -174,19 +174,20 @@ class Router
      */
     private function parseArgs($argsList = [])
     {
+        $argsListCount = count($argsList);
         /**
          * Check last args and unset if empty
          */
-        if (trim($argsList[count($argsList) - 1]) == "") {
+        if (trim($argsList[$argsListCount - 1]) == "") {
             // Invalid arg detected and removed
-            unset($argsList[count($argsList) - 1]);
+            unset($argsList[$argsListCount - 1]);
         }
          
-        if ((count($argsList) % 2) == 0) {
+        if (($argsListCount % 2) == 0) {
             /**
              * if the arguments are odd, I consider them as key => value pairs
              */
-            for ($i = 0; $i < count($argsList); $i++) {
+            for ($i = 0; $i < $argsListCount; $i++) {
                 $this->args[$argsList[$i]] = $argsList[($i + 1)];
                 $i++;
             }
