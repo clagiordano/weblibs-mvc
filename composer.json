@@ -1,5 +1,9 @@
 {
     "name": "clagiordano/webmvc",
+    "description": "A light mvc design pattern micro framework with automatic routing."
+    "type": "library",
+    "homepage": "https://github.com/clagiordano/weblibs-localization.git",
+    "license": "gpl3",
     "authors": [
         {
             "name": "Claudio Giordano",
