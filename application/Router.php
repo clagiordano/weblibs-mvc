@@ -20,10 +20,10 @@ class Router
     private $registry;
 
     /**
-     * @the controller path
+     * @property controller path
      */
     private $path;
-    private $args = array();
+    private $args = [];
     public $file;
     public $controller;
     public $action;

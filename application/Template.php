@@ -17,19 +17,18 @@ use clagiordano\webmvc\application\Registry;
 class Template
 {
     /**
-     * @the registry
+     * @property the registry
      * @access private
      */
     private $registry;
 
     /**
-     * @Variables array
+     * @property array variables
      * @access private
      */
-    private $vars = array();
+    private $vars = [];
 
     /**
-     *
      * @constructor
      * @access public
      * @return void
@@ -65,6 +64,6 @@ class Template
             $key = $value;
         }
 
-        include ($path);
+        require_once $path;
     }
 }
