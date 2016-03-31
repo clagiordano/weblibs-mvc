@@ -52,10 +52,12 @@ class Template
 
     public function show($name)
     {
-        $path = __SITE_PATH . '/views' . '/' . $name . '.php';
+        $path = $this->registry->router->getControllersPath() . '/../views' . '/' . $name . '.php';
 
         if (file_exists($path) === false) {
-            throw new \Exception('Template not found in ' . $path);
+            throw new \InvalidArgumentException(
+                __METHOD__ . ": Template not found in '{$path}'"
+            );
         }
 
         // Load variables

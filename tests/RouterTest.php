@@ -12,57 +12,53 @@ use clagiordano\weblibs\mvc\Template;
  */
 class RouterTest extends \PHPUnit_Framework_TestCase
 {
-    private $router = null;
+    /** @var Registry $registry */
     private $registry = null;
 
     public function setUp()
     {
-        /*$this->registry = new Registry();
+        /**
+         * Create a new registry object
+         **/
+        $this->registry = new Registry();
         $this->assertInstanceOf(
             'clagiordano\weblibs\mvc\Registry',
             $this->registry
         );
 
-        $this->router = new Router($this->registry);
-        $this->assertInstanceOf(
-            'clagiordano\weblibs\mvc\Router',
-            $this->router
-        );
-
-        $this->router->setPath(__DIR__ . '/../controllers');
-
-        $this->template = new Template($this->registry);*/
-
-        /**
-         * Create a new registry object
-         **/
-        $registry = new Registry();
-
         /**
          * load the router
          */
-        $registry->router = new Router($registry);
+        $this->registry->router = new Router($this->registry);
+        $this->assertInstanceOf(
+            'clagiordano\weblibs\mvc\Router',
+            $this->registry->router
+        );
 
         /**
          * set the path to the controllers directory
          */
-        $registry->router->setPath(__DIR__ . '/../controllers');
+        $this->registry->router->setControllersPath(__DIR__ . '/../controllers');
 
         /**
          * load up the template
          */
-        $registry->template = new Template($registry);
+        $this->registry->template = new Template($this->registry);
+        $this->assertInstanceOf(
+            'clagiordano\weblibs\mvc\Template',
+            $this->registry->template
+        );
 
         /**
          * load the controller
          */
-        $registry->router->loader();
+        $this->registry->router->loader();
     }
 
     public function testSetInvalidPath()
     {
         $this->expectException('InvalidArgumentException');
-        $this->router->setPath('/controllers');
+        $this->registry->router->setControllersPath('/controllers');
     }
 
     public function testLoader()

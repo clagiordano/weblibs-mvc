@@ -18,7 +18,7 @@ class Router
     private $registry;
 
     /** @var string $path controller path */
-    private $path;
+    private $controllersPath;
     private $args = [];
     public $file;
     public $controller;
@@ -34,26 +34,36 @@ class Router
     }
 
     /**
-     * set controller directory path
+     * set the controller directory path
      *
-     * @param string $path
+     * @param string $controllersPath
      * @return void
      */
-    public function setPath($path)
+    public function setControllersPath($controllersPath)
     {
         /**
          * check if path is a directory
          */
-        if (is_dir($path) === false) {
+        if (is_dir($controllersPath) === false) {
             throw new \InvalidArgumentException(
-                __METHOD__ . ": Invalid controller path: '{$path}'"
+                __METHOD__ . ": Invalid controller path: '{$controllersPath}'"
             );
         }
 
         /**
          * set the path
          */
-        $this->path = $path;
+        $this->controllersPath = $controllersPath;
+    }
+
+    /**
+     * Returns the controller directory path
+     *
+     * @return string
+     */
+    public function getControllersPath()
+    {
+        return $this->controllersPath;
     }
 
     /**
@@ -73,14 +83,14 @@ class Router
          * if the file is not there diaf
          */
         if (is_readable($this->file) === false) {
-            $this->file       = $this->path . '/error404.php';
+            $this->file       = $this->controllersPath . '/error404.php';
             $this->controller = 'error404';
         }
 
         /**
          * include the controller
          */
-        include $this->file;
+        require_once $this->file;
 
         /**
          * a new controller class instance
@@ -157,7 +167,7 @@ class Router
         /**
          * set the file path
          */
-        $this->file = $this->path . '/' . $this->controller . 'Controller.php';
+        $this->file = $this->controllersPath . '/' . $this->controller . 'Controller.php';
     }
 
     /**
