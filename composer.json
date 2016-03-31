@@ -15,8 +15,8 @@
     },
     "autoload": {
         "psr-4": {
-            "clagiordano\\weblibs\\webmvc\\": "src/",
-            "clagiordano\\weblibs\\webmvc\\tests\\": "tests/"
+            "clagiordano\\weblibs\\mvc\\": "src/",
+            "clagiordano\\weblibs\\mvc\\tests\\": "tests/"
         }
     }
 }

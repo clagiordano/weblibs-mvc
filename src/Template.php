@@ -1,6 +1,6 @@
 <?php
 
-namespace clagiordano\weblibs\webmvc;
+namespace clagiordano\weblibs\mvc;
 
 use clagiordano\weblibs\webmvc\Registry;
 

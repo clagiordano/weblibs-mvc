@@ -1,8 +1,8 @@
 <?php
 
-namespace clagiordano\weblibs\webmvc;
+namespace clagiordano\weblibs\mvc;
 
-use clagiordano\weblibs\webmvc\Registry;
+use clagiordano\weblibs\mvc\Registry;
 
 /**
  * The router class is responsible for loading up the correct controller.
