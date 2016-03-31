@@ -2,7 +2,7 @@
 
 namespace clagiordano\weblibs\mvc;
 
-use clagiordano\weblibs\webmvc\Registry;
+use clagiordano\weblibs\mvc\Registry;
 
 /**
  * The Contoller is the C in MVC.

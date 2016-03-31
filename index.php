@@ -16,9 +16,9 @@ define ('__SITE_WEB_PATH', $URI);
  */
 include 'includes/init.php';
 
-use clagiordano\weblibs\webmvc\Registry;
-use clagiordano\weblibs\webmvc\Router;
-use clagiordano\weblibs\webmvc\Template;
+use clagiordano\weblibs\mvc\Registry;
+use clagiordano\weblibs\mvc\Router;
+use clagiordano\weblibs\mvc\Template;
 
 /**
  * Create a new registry object

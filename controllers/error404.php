@@ -1,6 +1,6 @@
 <?php
 
-use clagiordano\webmvc\application\Controller;
+use clagiordano\weblibs\mvc\Controller;
 
 class error404Controller extends Controller
 {

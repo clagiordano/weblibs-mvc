@@ -45,7 +45,9 @@ class Router
          * check if path is a directory
          */
         if (is_dir($path) === false) {
-            throw new \Exception('Invalid controller path: `' . $path . '`');
+            throw new \InvalidArgumentException(
+                __METHOD__ . ": Invalid controller path: '{$path}'"
+            );
         }
 
         /**
@@ -102,8 +104,7 @@ class Router
     }
 
     /**
-     *
-     * get the controller
+     * Sets interna property file with the correct controller path.
      *
      * @access private
      * @return void
