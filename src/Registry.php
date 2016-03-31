@@ -17,7 +17,7 @@ class Registry
      * @the vars array
      * @access private
      */
-    private $vars = array();
+    private $vars = [];
 
     /**
      * @set undefined vars

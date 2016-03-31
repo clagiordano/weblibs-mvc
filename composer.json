@@ -1,6 +1,6 @@
 {
-    "name": "clagiordano/webmvc",
-    "description": "A light mvc design pattern micro framework with automatic routing.",
+    "name": "clagiordano/weblibs-mvc",
+    "description": "weblibs-mvc is an simple and lightweight php routing component.",
     "type": "library",
     "homepage": "https://github.com/clagiordano/webmvc.git",
     "license": "GPL-3.0",
@@ -10,6 +10,9 @@
             "email": "claudio.giordano@autistici.org"
         }
     ],
+    "require": {
+        "php": ">=5.4"
+    },
     "autoload": {
         "psr-4": {
             "clagiordano\\webmvc\\": "src/"
