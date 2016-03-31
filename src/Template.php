@@ -33,7 +33,7 @@ class Template
      * @access public
      * @return void
      */
-    function __construct(Registry $registry)
+    public function __construct(Registry $registry)
     {
         $this->registry = $registry;
     }
@@ -50,7 +50,7 @@ class Template
         $this->vars[$index] = $value;
     }
 
-    function show($name)
+    public function show($name)
     {
         $path = __SITE_PATH . '/views' . '/' . $name . '.php';
 

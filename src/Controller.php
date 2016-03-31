@@ -22,7 +22,7 @@ abstract class Controller
      */
     protected $registry;
 
-    function __construct(Registry $registry)
+    public function __construct(Registry $registry)
     {
         $this->registry = $registry;
     }
@@ -30,5 +30,5 @@ abstract class Controller
     /**
      * @all controllers must contain an index method
      */
-    abstract function index();
+    abstract public function index();
 }

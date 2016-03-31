@@ -28,7 +28,7 @@ class Router
      *
      * @param Registry $registry
      */
-    function __construct(Registry $registry)
+    public function __construct(Registry $registry)
     {
         $this->registry = $registry;
     }
@@ -39,7 +39,7 @@ class Router
      * @param string $path
      * @return void
      */
-    function setPath($path)
+    public function setPath($path)
     {
         /**
          * check if path is a directory
