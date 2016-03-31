@@ -55,7 +55,7 @@ class Template
      * @param string $viewName
      * @return
      */
-    public function show($name)
+    public function show($viewName)
     {
         $path = $this->registry->router->getControllersPath()
             . '/../views' . '/' . $viewName . '.php';
