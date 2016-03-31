@@ -1,7 +1,7 @@
-# weblibs-mvc
+﻿# weblibs-mvc
 weblibs-mvc is an simple and lightweight php routing component.
 
-Based on http://php-html.net/tutorials/model-view-controller-in-php/
+Based on http://php-html.net/tutorials/model-view-controller-in-php/<br />
 Based on http://phpro.org/tutorials/Model-View-Controller-MVC.html#9
 
 ## Installation
