@@ -50,9 +50,15 @@ class Template
         $this->vars[$index] = $value;
     }
 
+    /**
+     *
+     * @param string $viewName
+     * @return
+     */
     public function show($name)
     {
-        $path = $this->registry->router->getControllersPath() . '/../views' . '/' . $name . '.php';
+        $path = $this->registry->router->getControllersPath()
+            . '/../views' . '/' . $viewName . '.php';
 
         if (file_exists($path) === false) {
             throw new \InvalidArgumentException(
