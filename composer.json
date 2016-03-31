@@ -2,7 +2,7 @@
     "name": "clagiordano/weblibs-mvc",
     "description": "weblibs-mvc is an simple and lightweight php routing component.",
     "type": "library",
-    "homepage": "https://github.com/clagiordano/webmvc.git",
+    "homepage": "https://github.com/clagiordano/weblibs-mvc.git",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -15,7 +15,8 @@
     },
     "autoload": {
         "psr-4": {
-            "clagiordano\\webmvc\\": "src/"
+            "clagiordano\\weblibs\\webmvc\\": "src/",
+            "clagiordano\\weblibs\\webmvc\\tests\\": "tests/"
         }
     }
 }

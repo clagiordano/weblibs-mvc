@@ -1,8 +1,8 @@
 <?php
 
-namespace clagiordano\webmvc\application;
+namespace clagiordano\weblibs\webmvc;
 
-use clagiordano\webmvc\application\Registry;
+use clagiordano\weblibs\webmvc\Registry;
 
 /**
  * The router class is responsible for loading up the correct controller.
@@ -14,14 +14,10 @@ use clagiordano\webmvc\application\Registry;
  */
 class Router
 {
-    /**
-     * @the registry
-     */
+    /** @var Registry registry */
     private $registry;
 
-    /**
-     * @property controller path
-     */
+    /** @var string $path controller path */
     private $path;
     private $args = [];
     public $file;
@@ -93,10 +89,9 @@ class Router
         /**
          * check if the action is callable
          */
+        $action = $this->action;
         if (is_callable([$controller, $this->action]) === false) {
             $action = 'index';
-        } else {
-            $action = $this->action;
         }
 
         /**
@@ -128,15 +123,12 @@ class Router
              */
             $parts            = explode('/', $route);
             $this->controller = $parts[0];
-            //~ echo "[Debug]: route: $route <br />";
-            //~ echo "[Debug]: controller: {$this->controller} <br />";
-            
+
             // Shift element off the beginning of array
             array_shift($parts);
 
             if (isset($parts[0])) {
                 $this->action = $parts[0];
-                //~ echo "[Debug]: action: {$this->action} <br />";
 
                 // Shift element off the beginning of array
                 array_shift($parts);
@@ -182,7 +174,7 @@ class Router
             // Invalid arg detected and removed
             unset($argsList[$argsListCount - 1]);
         }
-         
+
         if (($argsListCount % 2) == 0) {
             /**
              * if the arguments are odd, I consider them as key => value pairs

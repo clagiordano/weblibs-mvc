@@ -1,6 +1,6 @@
 <?php
 
-namespace clagiordano\webmvc\application;
+namespace clagiordano\weblibs\webmvc;
 
 /**
  * The registry is an object where site wide variables can be stored without
