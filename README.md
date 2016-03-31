@@ -1,6 +1,13 @@
-# webmvc
-
-A light mvc design pattern micro framework with automatic routing
+# weblibs-mvc
+weblibs-mvc is an simple and lightweight php routing component.
 
 Based on http://php-html.net/tutorials/model-view-controller-in-php/
 Based on http://phpro.org/tutorials/Model-View-Controller-MVC.html#9
+
+## Installation
+The recommended way to install weblibs-mvc is through [Composer](https://getcomposer.org).
+```bash
+composer require clagiordano/weblibs-mvc
+```
+## Legal
+*Copyright (C) Claudio Giordano <claudio.giordano@autistici.org>*

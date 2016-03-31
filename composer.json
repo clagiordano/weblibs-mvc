@@ -2,7 +2,7 @@
     "name": "clagiordano/webmvc",
     "description": "A light mvc design pattern micro framework with automatic routing.",
     "type": "library",
-    "homepage": "https://github.com/clagiordano/weblibs-localization.git",
+    "homepage": "https://github.com/clagiordano/webmvc.git",
     "license": "GPL-3.0",
     "authors": [
         {
@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "clagiordano\\webmvc\\": "application"
+            "clagiordano\\webmvc\\": "src/"
         }
     }
 }
