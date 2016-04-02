@@ -2,8 +2,6 @@
 
 namespace clagiordano\weblibs\mvc;
 
-use clagiordano\weblibs\mvc\Registry;
-
 /**
  * The Contoller is the C in MVC.
  * The base controller is a simple abstract class that defines the
