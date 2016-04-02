@@ -2,7 +2,6 @@
 
 namespace clagiordano\weblibs\mvc;
 
-use clagiordano\weblibs\mvc\Controller;
 use clagiordano\weblibs\mvc\Registry;
 use clagiordano\weblibs\mvc\Router;
 use clagiordano\weblibs\mvc\Template;
@@ -12,8 +11,6 @@ use clagiordano\weblibs\mvc\Template;
  */
 class Application
 {
-    /** Controller $controller **/
-    private $controller = null;
     /** Registry $registry */
     private $registry = null;
     /** Router $router **/
@@ -29,25 +26,6 @@ class Application
         $this->setRegistry(new Registry());
 
         return $this;
-    }
-
-    /**
-     * @param Controller $controller
-     * @return \clagiordano\weblibs\mvc\Application
-     */
-    public function setController(Controller $controller)
-    {
-        $this->controller = $controller;
-
-        return $this;
-    }
-
-    /**
-     * @return \clagiordano\weblibs\mvc\Router
-     */
-    public function getController()
-    {
-        return $this->controller;
     }
 
     /**
