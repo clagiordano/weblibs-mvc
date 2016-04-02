@@ -54,9 +54,6 @@ class Router
          * set the path
          */
         $this->controllersPath = $controllersPath;
-
-        set_include_path(get_include_path() . PATH_SEPARATOR . $controllersPath);
-        spl_autoload_register();
     }
 
     /**
@@ -135,7 +132,7 @@ class Router
             /**
              * get the parts of the route
              */
-            $parts            = explode('/', $route);
+            $parts = explode('/', $route);
             $this->controller = $parts[0];
 
             // Shift element off the beginning of array
