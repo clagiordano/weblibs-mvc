@@ -3,11 +3,9 @@
 use clagiordano\weblibs\mvc\Controller;
 
 /**
- * Description of indexController
- *
- * @author claudio
+ * Sample default IndexController
  */
-class indexController extends Controller
+class IndexController extends Controller
 {
     public function index()
     {

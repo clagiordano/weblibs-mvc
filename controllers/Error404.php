@@ -2,7 +2,10 @@
 
 use clagiordano\weblibs\mvc\Controller;
 
-class error404Controller extends Controller
+/**
+ * Sample default Error404Controller
+ */
+class Error404Controller extends Controller
 {
     public function index()
     {

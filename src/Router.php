@@ -81,8 +81,8 @@ class Router
          * if the file is not there diaf
          */
         if (is_readable($this->controllerFile) === false) {
-            $this->controllerFile = $this->controllersPath . '/error404.php';
-            $this->controller = 'error404';
+            $this->controllerFile = $this->getControllersPath() . '/error404.php';
+            $this->controller = 'Error404';
         }
 
         /**
@@ -152,7 +152,7 @@ class Router
         }
 
         if (empty($this->controller)) {
-            $this->controller = 'index';
+            $this->controller = 'Index';
         }
 
         /**
