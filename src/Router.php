@@ -14,7 +14,6 @@ class Router
 {
     /** @var Application $application */
     protected $application;
-
     /** @var string $path controller path */
     private $controllersPath;
     private $args = [];
@@ -122,34 +121,38 @@ class Router
         /**
          * get the route from the url
          */
-        $route = filter_input(INPUT_GET, 'rt', FILTER_SANITIZE_URL);
+        $route = filter_input(
+            INPUT_GET, '
+            rt',
+            FILTER_SANITIZE_URL,
+            [
+                'default' => 'index'
+            ]
+        );
 
-        if (empty($route)) {
-            $route = 'index';
-        } else {
-            /**
-             * get the parts of the route
-             */
-            $parts = explode('/', $route);
-            $this->controller = $parts[0];
+        /**
+         * get the parts of the route
+         */
+        $parts = explode('/', $route);
+        $this->controller = $parts[0];
+
+        // Shift element off the beginning of array
+        array_shift($parts);
+
+        if (isset($parts[0])) {
+            $this->action = $parts[0];
 
             // Shift element off the beginning of array
             array_shift($parts);
-
-            if (isset($parts[0])) {
-                $this->action = $parts[0];
-
-                // Shift element off the beginning of array
-                array_shift($parts);
-            }
-
-            /**
-             * Get optional residual args
-             */
-            if (count($parts) > 0) {
-                $this->parseArgs($parts);
-            }
         }
+
+        /**
+         * Get optional residual args
+         */
+        if (count($parts) > 0) {
+            $this->parseArgs($parts);
+        }
+
 
         if (empty($this->controller)) {
             $this->controller = 'Index';

@@ -18,13 +18,18 @@ abstract class Controller
     /** @var Application $application */
     protected $application;
 
+    /**
+     *
+     * @param clagiordano\weblibs\mvc\Application $application
+     * @return clagiordano\weblibs\mvc\Controller
+     */
     public function __construct(Application $application)
     {
         $this->application = $application;
     }
 
     /**
-     * @all controllers must contain an index method
+     * All controllers must implements an index method
      */
     abstract public function index();
 }

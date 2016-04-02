@@ -7,6 +7,9 @@ use clagiordano\weblibs\mvc\Controller;
  */
 class IndexController extends Controller
 {
+    /**
+     * All controllers must implements an index method
+     */
     public function index()
     {
         /** set a template variable */
