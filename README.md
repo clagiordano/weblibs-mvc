@@ -2,6 +2,8 @@
 weblibs-mvc is an simple and lightweight php routing component.
 This component can have a RESTful support simply adding an *.htaccess* file, see below for more details.
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/336cc1e2-157e-456c-85ba-7f105683fb80/big.png)](https://insight.sensiolabs.com/projects/336cc1e2-157e-456c-85ba-7f105683fb80)
+
 Based on http://php-html.net/tutorials/model-view-controller-in-php/<br />
 Based on http://phpro.org/tutorials/Model-View-Controller-MVC.html#9
 
