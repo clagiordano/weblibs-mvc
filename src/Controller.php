@@ -17,14 +17,12 @@ use clagiordano\weblibs\mvc\Registry;
  */
 abstract class Controller
 {
-    /**
-     * @registry object
-     */
-    protected $registry;
+    /** @var Application $application */
+    protected $application;
 
-    public function __construct(Registry $registry)
+    public function __construct(Application $application)
     {
-        $this->registry = $registry;
+        $this->application = $application;
     }
 
     /**

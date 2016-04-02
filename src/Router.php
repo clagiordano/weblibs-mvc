@@ -2,8 +2,6 @@
 
 namespace clagiordano\weblibs\mvc;
 
-use clagiordano\weblibs\mvc\Registry;
-
 /**
  * The router class is responsible for loading up the correct controller.
  * It does nothing else. The value of the controller comes from the URL.
@@ -14,8 +12,8 @@ use clagiordano\weblibs\mvc\Registry;
  */
 class Router
 {
-    /** @var Registry registry */
-    private $registry;
+    /** @var Application $application */
+    protected $application;
 
     /** @var string $path controller path */
     private $controllersPath;
@@ -26,11 +24,11 @@ class Router
 
     /**
      *
-     * @param Registry $registry
+     * @param Application $application
      */
-    public function __construct(Registry $registry)
+    public function __construct(Application $application)
     {
-        $this->registry = $registry;
+        $this->application = $application;
     }
 
     /**
@@ -96,7 +94,7 @@ class Router
          * a new controller class instance
          */
         $class = $this->controller . 'Controller';
-        $controller = new $class($this->registry);
+        $controller = new $class($this->application);
 
         /**
          * check if the action is callable

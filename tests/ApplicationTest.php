@@ -36,7 +36,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
          * Create and sets the router
          */
         $this->application->setRouter(
-            new Router($this->application->getRegistry())
+            new Router($this->application)
         );
 
 
@@ -56,7 +56,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
          * load up the template
          */
         $this->application->setTemplate(
-            new Template($this->application->getRegistry())
+            new Template($this->application)
         );
 
         $this->assertInstanceOf(

@@ -2,8 +2,6 @@
 
 namespace clagiordano\weblibs\mvc;
 
-use clagiordano\weblibs\mvc\Registry;
-
 /**
  * The templates themselves are basically HTML files with a little PHP embedded.
  * Do not let the separation Nazi's try to tell you that you need to have full
@@ -16,11 +14,8 @@ use clagiordano\weblibs\mvc\Registry;
  */
 class Template
 {
-    /**
-     * @property the registry
-     * @access private
-     */
-    private $registry;
+    /** @var Application $application */
+    protected $application;
 
     /**
      * @property array variables
@@ -29,13 +24,12 @@ class Template
     private $vars = [];
 
     /**
-     * @constructor
-     * @access public
+     * Constructor
      * @return void
      */
-    public function __construct(Registry $registry)
+    public function __construct(Application $application)
     {
-        $this->registry = $registry;
+        $this->application = $application;
     }
 
     /**
@@ -57,7 +51,7 @@ class Template
      */
     public function show($viewName)
     {
-        $path = $this->registry->router->getControllersPath()
+        $path = $this->application->getRouter()->getControllersPath()
             . '/../views' . '/' . $viewName . '.php';
 
         if (file_exists($path) === false) {

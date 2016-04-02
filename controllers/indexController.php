@@ -12,8 +12,8 @@ class indexController extends Controller
     public function index()
     {
         /** set a template variable */
-        $this->template->welcome = 'Welcome to weblibs-mvc';
+        $this->application->getRegistry()->welcome = 'Welcome to weblibs-mvc';
         /** load the index template */
-        $this->registry->template->show('index');
+        $this->application->getTemplate()->show('index');
     }
 }

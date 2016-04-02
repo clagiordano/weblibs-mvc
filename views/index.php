@@ -1,3 +1,3 @@
 <h1>
-    <?php echo $this->registry->template->vars['welcome']; ?>
+    <?php echo $this->application->getRegistry()->welcome; ?>
 </h1>
