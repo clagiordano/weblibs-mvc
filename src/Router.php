@@ -54,6 +54,9 @@ class Router
          * set the path
          */
         $this->controllersPath = $controllersPath;
+
+        set_include_path(get_include_path() . PATH_SEPARATOR . $controllersPath);
+        spl_autoload_register();
     }
 
     /**
@@ -82,20 +85,32 @@ class Router
         /**
          * if the file is not there diaf
          */
-        if (is_readable($this->controllerFile) === false) {
+        /*if (is_readable($this->controllerFile) === false) {
             $this->controllerFile       = $this->controllersPath . '/error404.php';
             $this->controller = 'error404';
-        }
+        }*/
 
         /**
          * include the controller
          */
-        require_once $this->controllerFile;
+        //require_once $this->controllerFile;
 
         /**
          * a new controller class instance
          */
-        $class      = $this->controller . 'Controller';
+        $class = $this->controller . 'Controller';
+        /*include_once('error404Controller');
+        __autoload($class);
+
+        if (!class_exists($class) && !class_exists('error404Controller')) {
+            throw new \InvalidArgumentException(
+                __METHOD__ . ": Missing classes {$class} and error404Controller"
+            );
+        }
+
+        if (!class_exists($class)) {
+            $class = 'error404Controller';
+        }*/
         $controller = new $class($this->registry);
 
         /**
