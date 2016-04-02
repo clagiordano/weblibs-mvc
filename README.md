@@ -1,5 +1,6 @@
 ﻿# weblibs-mvc
 weblibs-mvc is an simple and lightweight php routing component.
+This component can have a RESTful support simply adding an *.htaccess* file, see below for more details.
 
 Based on http://php-html.net/tutorials/model-view-controller-in-php/<br />
 Based on http://phpro.org/tutorials/Model-View-Controller-MVC.html#9
@@ -9,6 +10,25 @@ The recommended way to install weblibs-mvc is through [Composer](https://getcomp
 ```bash
 composer require clagiordano/weblibs-mvc
 ```
+
+### Adding RESTful support to destination project
+Simply add into yours project root a file named ***.htaccess*** <br />
+*(webserver must be allow override)* which contains the following lines:
+```http
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?rt=$1 [L,QSA]
+```
+
+this simple steps allow your application make RESTful calls like:
+
+```http
+http://www.example.com/clients/68563
+http://www.example.com/access/login
+http://www.example.com/chart/
+http://www.example.com/products/6574
+``` 
 
 ## Description of the main components
 
