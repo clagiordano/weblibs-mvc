@@ -19,7 +19,8 @@ class Router
     private $args = [];
     public $controllerFile;
     public $controller;
-    public $action;
+    /** @var string $controllerAction */
+    public $controllerAction;
 
     /**
      *
@@ -65,9 +66,6 @@ class Router
 
     /**
      * load the controller
-     *
-     * @access public
-     * @return void
      */
     public function loader()
     {
@@ -80,7 +78,7 @@ class Router
          * if the file is not there diaf
          */
         if (is_readable($this->controllerFile) === false) {
-            $this->controllerFile = $this->getControllersPath() . '/error404.php';
+            $this->controllerFile = $this->getControllersPath() . '/Error404.php';
             $this->controller = 'Error404';
         }
 
@@ -92,14 +90,14 @@ class Router
         /**
          * a new controller class instance
          */
-        $class = $this->controller . 'Controller';
+        $class = ucfirst($this->controller . 'Controller');
         $controller = new $class($this->application);
 
         /**
          * check if the action is callable
          */
-        $action = $this->action;
-        if (is_callable([$controller, $this->action]) === false) {
+        $action = $this->controllerAction;
+        if (is_callable([$controller, $this->controllerAction]) === false) {
             $action = 'index';
         }
 
@@ -119,6 +117,16 @@ class Router
     private function getCurrentController()
     {
         /**
+         * Sets the default controller
+         */
+         $this->controller = 'Index';
+
+        /**
+         * Sets the default action
+         */
+         $this->controllerAction = 'index';
+
+        /**
          * get the route from the url
          */
         $route = filter_input(
@@ -134,13 +142,13 @@ class Router
          * get the parts of the route
          */
         $parts = explode('/', $route);
-        $this->controller = $parts[0];
 
-        // Shift element off the beginning of array
+        /** Shift element off the beginning of array */
         array_shift($parts);
 
         if (isset($parts[0])) {
-            $this->action = $parts[0];
+            $this->controller = $parts[0];
+            $this->controllerAction = $parts[0];
 
             // Shift element off the beginning of array
             array_shift($parts);
@@ -153,22 +161,11 @@ class Router
             $this->parseArgs($parts);
         }
 
-
-        if (empty($this->controller)) {
-            $this->controller = 'Index';
-        }
-
-        /**
-         * Get action
-         */
-        if (empty($this->action)) {
-            $this->action = 'index';
-        }
-
         /**
          * set the file path
          */
-        $this->controllerFile = $this->getControllersPath() . '/' . $this->controller . 'Controller.php';
+        $this->controllerFile = $this->getControllersPath() . '/';
+        $this->controllerFile .= $this->controller . 'Controller.php';
     }
 
     /**

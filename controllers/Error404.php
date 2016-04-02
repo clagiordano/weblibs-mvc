@@ -13,10 +13,10 @@ class Error404Controller extends Controller
     public function index()
     {
         /** Sets template variables */
-        $this->application->getTemplate()->heading = "Oops, you've found a dead link.";
-        $this->application->getTemplate()->sub_heading = 'Use the links at the top to get back.';
+        $this->application->getRegistry()->heading = "Oops, you've found a dead link.";
+        $this->application->getRegistry()->sub_heading = 'Use the links at the top to get back.';
 
         /** Load the error404 template */
-        $this->registry->template->show('error404');
+        $this->application->getTemplate()->show('error404');
     }
 }

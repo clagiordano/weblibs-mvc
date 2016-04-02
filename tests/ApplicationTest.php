@@ -65,11 +65,6 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->application->getRegistry()->testProperty = "TEST!";
-
-        /**
-         * load the controller
-         */
-        $this->application->getRouter()->loader();
     }
 
     public function testSetInvalidPath()
