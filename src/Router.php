@@ -20,7 +20,7 @@ class Router
     /** @var string $path controller path */
     private $controllersPath;
     private $args = [];
-    public $file;
+    public $controllerFile;
     public $controller;
     public $action;
 
@@ -77,20 +77,20 @@ class Router
         /**
          * check the route
          */
-        $this->getController();
+        $this->getCurrentController();
 
         /**
          * if the file is not there diaf
          */
-        if (is_readable($this->file) === false) {
-            $this->file       = $this->controllersPath . '/error404.php';
+        if (is_readable($this->controllerFile) === false) {
+            $this->controllerFile       = $this->controllersPath . '/error404.php';
             $this->controller = 'error404';
         }
 
         /**
          * include the controller
          */
-        require_once $this->file;
+        require_once $this->controllerFile;
 
         /**
          * a new controller class instance
@@ -114,12 +114,12 @@ class Router
     }
 
     /**
-     * Sets interna property file with the correct controller path.
+     * Sets internal property file with the correct controller path.
      *
      * @access private
      * @return void
      */
-    private function getController()
+    private function getCurrentController()
     {
         /**
          * get the route from the url
@@ -167,7 +167,7 @@ class Router
         /**
          * set the file path
          */
-        $this->file = $this->controllersPath . '/' . $this->controller . 'Controller.php';
+        $this->controllerFile = $this->getControllersPath() . '/' . $this->controller . 'Controller.php';
     }
 
     /**
