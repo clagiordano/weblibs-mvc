@@ -28,6 +28,14 @@ class Router
      */
     public function __construct(Application $application)
     {
+        $registerStatus = spl_autoload_register([$this, 'autoloadController']);
+
+        if (!$registerStatus) {
+            throw new \RuntimeException(
+                __METHOD__ . ": Failed spl_autoload_register!"
+            );
+        }
+
         $this->application = $application;
     }
 
@@ -85,12 +93,13 @@ class Router
         /**
          * include the controller
          */
-        include_once $this->controllerFile;
+        //include_once $this->controllerFile;
 
         /**
          * a new controller class instance
          */
         $class = ucfirst($this->controller . 'Controller');
+        spl_autoload_call($class);
         $controller = new $class($this->application);
 
         /**
@@ -197,6 +206,22 @@ class Router
              * else I consider them as arguments list
              */
             $this->args = $argsList;
+        }
+    }
+
+    private function autoloadController($controllerClass)
+    {
+        if ($controllerClass) {
+            var_dump($this->getControllersPath());
+            set_include_path($this->getControllersPath());
+            //spl_autoload_extensions('.php');
+            spl_autoload($controllerClass);
+
+            if (!class_exists($controllerClass)) {
+                throw new \RuntimeException(
+                    __METHOD__ . ": Failed autoload for class '{$controllerClass}'!"
+                );
+            }
         }
     }
 }
