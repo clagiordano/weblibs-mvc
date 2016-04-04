@@ -91,11 +91,6 @@ class Router
         }
 
         /**
-         * include the controller
-         */
-        //include_once $this->controllerFile;
-
-        /**
          * a new controller class instance
          */
         $class = ucfirst($this->controller . 'Controller');
@@ -212,9 +207,7 @@ class Router
     private function autoloadController($controllerClass)
     {
         if ($controllerClass) {
-            var_dump($this->getControllersPath());
             set_include_path($this->getControllersPath());
-            //spl_autoload_extensions('.php');
             spl_autoload($controllerClass);
 
             if (!class_exists($controllerClass)) {
