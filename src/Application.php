@@ -7,15 +7,15 @@ use clagiordano\weblibs\mvc\Router;
 use clagiordano\weblibs\mvc\Template;
 
 /**
- *
+ * This is the main application class which handle other components.
  */
 class Application
 {
-    /** Registry $registry */
+    /** @var Registry $registry */
     private $registry = null;
-    /** Router $router **/
+    /** @var Router $router **/
     private $router = null;
-    /** Template $template **/
+    /** @var Template $template **/
     private $template = null;
 
     /**
