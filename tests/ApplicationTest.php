@@ -73,6 +73,9 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->application->getRouter()->setControllersPath('/controllers');
     }
 
+    /**
+     * @group defaultloader
+     */
     public function testDefaultLoader()
     {
         ob_start();
@@ -121,6 +124,31 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         ob_start();
         $this->application->getRouter()->loader('sample');
+        ob_end_clean();
+
+        $this->assertEquals(
+            'Sample',
+            $this->application->getRouter()->getController()
+        );
+
+        $this->assertEquals(
+            'index',
+            $this->application->getRouter()->getAction()
+        );
+
+        $this->assertEquals(
+            'This is the sample controller',
+            $this->application->getRegistry()->header
+        );
+    }
+
+    /**
+     * @group explicitsample2
+     */
+    public function testExplicitSampleLoader2()
+    {
+        ob_start();
+        $this->application->getRouter()->loader('sample/index');
         ob_end_clean();
 
         $this->assertEquals(

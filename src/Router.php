@@ -141,34 +141,35 @@ class Router
         /**
          * Sets the default controller
          */
-         $this->controller = ucfirst($route);
+        $this->controller = ucfirst($route);
 
         /**
          * Sets the default action
          */
-         $this->controllerAction = 'index';
+        $this->controllerAction = 'index';
 
         /**
-         * get the parts of the route
+         * Check for multi part route
          */
-        $parts = explode('/', $route);
+        if (strpos($route, '/') > 0) {
+            $parts = explode('/', $route);
 
-        /** Shift element off the beginning of array */
-        array_shift($parts);
+            $this->controller = ucfirst($parts[0]);
 
-        if (isset($parts[0])) {
-            $this->controller = $parts[0];
+            // Shift element off the beginning of array
+            array_shift($parts);
+
             $this->controllerAction = $parts[0];
 
             // Shift element off the beginning of array
             array_shift($parts);
-        }
 
-        /**
-         * Get optional residual args
-         */
-        if (count($parts) > 0) {
-            $this->parseArgs($parts);
+            /**
+             * Get optional residual args
+             */
+            if (count($parts) > 0) {
+                $this->parseArgs($parts);
+            }
         }
 
         /**
