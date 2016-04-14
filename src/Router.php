@@ -94,7 +94,6 @@ class Router
          * a new controller class instance
          */
         $class = ucfirst($this->controller . 'Controller');
-        spl_autoload_call($class);
         $controller = new $class($this->application);
 
         /**
@@ -204,11 +203,24 @@ class Router
         }
     }
 
+    /**
+     *
+     * @param string $controllerClass
+     */
     private function autoloadController($controllerClass)
     {
         if ($controllerClass) {
             set_include_path($this->getControllersPath());
             spl_autoload($controllerClass);
+
+            $classPath = $this->getControllersPath() . "/" .  $controllerClass . ".php";
+            if (!file_exists($classPath)) {
+                throw new \InvalidArgumentException(
+                    __METHOD__ . ": Invalid class path '{$classPath}'!"
+                );
+            }
+
+            require_once $classPath;
 
             if (!class_exists($controllerClass)) {
                 throw new \RuntimeException(
