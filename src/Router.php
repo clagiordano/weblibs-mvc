@@ -133,8 +133,8 @@ class Router
          * get the route from the url
          */
         $route = filter_input(
-            INPUT_GET, '
-            rt',
+            INPUT_GET,
+            'rt',
             FILTER_SANITIZE_URL,
             [
                 'default' => 'index'
