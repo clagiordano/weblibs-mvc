@@ -75,12 +75,27 @@ class Router
     /**
      * load the controller
      */
-    public function loader()
+    public function loader($route = null)
     {
         /**
          * check the route
          */
-        $this->getCurrentController();
+
+        /**
+         * get the route from the url
+         */
+        if (is_null($route)) {
+            $route = filter_input(
+                INPUT_GET,
+                'rt',
+                FILTER_SANITIZE_URL,
+                [
+                    'default' => 'index'
+                ]
+            );
+        }
+
+        $this->parseRoute($route);
 
         /**
          * if the file is not there diaf
@@ -117,29 +132,21 @@ class Router
      * @access private
      * @return void
      */
-    private function getCurrentController()
+    private function parseRoute($route = 'index')
     {
+        if (is_null($route) || $route === false) {
+            $route = 'index';
+        }
+
         /**
          * Sets the default controller
          */
-         $this->controller = 'Index';
+         $this->controller = ucfirst($route);
 
         /**
          * Sets the default action
          */
          $this->controllerAction = 'index';
-
-        /**
-         * get the route from the url
-         */
-        $route = filter_input(
-            INPUT_GET,
-            'rt',
-            FILTER_SANITIZE_URL,
-            [
-                'default' => 'index'
-            ]
-        );
 
         /**
          * get the parts of the route
@@ -228,5 +235,15 @@ class Router
                 );
             }
         }
+    }
+
+    public function getController()
+    {
+        return $this->controller;
+    }
+
+    public function getAction()
+    {
+        return $this->controllerAction;
     }
 }

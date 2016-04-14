@@ -73,8 +73,49 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->application->getRouter()->setControllersPath('/controllers');
     }
 
-    public function testLoader()
+    public function testDefaultLoader()
     {
         $this->application->getRouter()->loader();
+
+        $this->assertEquals(
+            'Index',
+            $this->application->getRouter()->getController()
+        );
+
+        $this->assertEquals(
+            'index',
+            $this->application->getRouter()->getAction()
+        );
     }
+
+    public function testExplicitDefaultLoader()
+    {
+        $this->application->getRouter()->loader('index');
+
+        $this->assertEquals(
+            'Index',
+            $this->application->getRouter()->getController()
+        );
+
+        $this->assertEquals(
+            'index',
+            $this->application->getRouter()->getAction()
+        );
+    }
+
+    public function testExplicitSampleLoader()
+    {
+        $this->application->getRouter()->loader('sample');
+
+        $this->assertEquals(
+            'Sample',
+            $this->application->getRouter()->getController()
+        );
+
+        $this->assertEquals(
+            'index',
+            $this->application->getRouter()->getAction()
+        );
+    }
+
 }
