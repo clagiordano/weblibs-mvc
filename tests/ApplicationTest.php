@@ -75,7 +75,9 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultLoader()
     {
+        ob_start();
         $this->application->getRouter()->loader();
+        ob_end_clean();
 
         $this->assertEquals(
             'Index',
@@ -85,12 +87,19 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'index',
             $this->application->getRouter()->getAction()
+        );
+
+        $this->assertEquals(
+            'Welcome to weblibs-mvc',
+            $this->application->getRegistry()->welcome
         );
     }
 
     public function testExplicitDefaultLoader()
     {
+        ob_start();
         $this->application->getRouter()->loader('index');
+        ob_end_clean();
 
         $this->assertEquals(
             'Index',
@@ -101,11 +110,18 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
             'index',
             $this->application->getRouter()->getAction()
         );
+
+        $this->assertEquals(
+            'Welcome to weblibs-mvc',
+            $this->application->getRegistry()->welcome
+        );
     }
 
     public function testExplicitSampleLoader()
     {
+        ob_start();
         $this->application->getRouter()->loader('sample');
+        ob_end_clean();
 
         $this->assertEquals(
             'Sample',
@@ -115,6 +131,11 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             'index',
             $this->application->getRouter()->getAction()
+        );
+
+        $this->assertEquals(
+            'This is the sample controller',
+            $this->application->getRegistry()->header
         );
     }
 

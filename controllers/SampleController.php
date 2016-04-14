@@ -15,6 +15,6 @@ class SampleController extends Controller
         /** set a template variable */
         $this->application->getRegistry()->header = 'This is the sample controller';
         /** load the index template */
-        $this->application->getTemplate()->show('index');
+        $this->application->getTemplate()->show('sample');
     }
 }
