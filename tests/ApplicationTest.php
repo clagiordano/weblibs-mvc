@@ -167,4 +167,23 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testInvalidController()
+    {
+        $this->application->getRouter()->loader('invalid');
+    }
+
+    public function testInvalidAction()
+    {
+        $this->application->getRouter()->loader('sample/invalid');
+    }
+
+    public function testParseRoute()
+    {
+        $this->application->getRouter()->loader('sample/index/aaa/bbb');
+    }
+
+    public function testParseRoute2()
+    {
+        $this->application->getRouter()->loader('sample/index/aaa/bbb/');
+    }
 }
