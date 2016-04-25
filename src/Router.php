@@ -195,19 +195,21 @@ class Router
             unset($argsList[$argsListCount - 1]);
         }
 
-        if (($argsListCount % 2) == 0) {
+        if (($argsListCount % 2) != 0) {
             /**
-             * if the arguments are odd, I consider them as key => value pairs
-             */
-            for ($i = 0; $i < $argsListCount; $i++) {
-                $this->args[$argsList[$i]] = $argsList[($i + 1)];
-                $i++;
-            }
-        } else {
-            /**
-             * else I consider them as arguments list
+             * I consider them as arguments list
              */
             $this->args = $argsList;
+
+            return;
+        }
+
+        /**
+         * if the arguments are odd, I consider them as key => value pairs
+         */
+        for ($i = 0; $i < $argsListCount; $i++) {
+            $this->args[$argsList[$i]] = $argsList[($i + 1)];
+            $i++;
         }
     }
 
@@ -215,7 +217,7 @@ class Router
      *
      * @param string $controllerClass
      */
-    private function autoloadController($controllerClass)
+    public function autoloadController($controllerClass)
     {
         if ($controllerClass) {
             set_include_path($this->getControllersPath());
