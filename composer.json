@@ -3,7 +3,7 @@
     "description": "weblibs-mvc is an simple and lightweight php routing component.",
     "type": "library",
     "homepage": "https://github.com/clagiordano/weblibs-mvc.git",
-    "license": "GPL-3.0",
+    "license": "LGPL-3.0",
     "authors": [
         {
             "name": "Claudio Giordano",
