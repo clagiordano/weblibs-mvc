@@ -47,6 +47,12 @@ class Registry
      */
     public function __get($index)
     {
-        return $this->vars[$index];
+        $value = null;
+
+        if (isset($this->vars[$index])) {
+            $value = $this->vars[$index];
+        }
+
+        return $value;
     }
 }
