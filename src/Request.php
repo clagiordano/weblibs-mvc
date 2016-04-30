@@ -44,7 +44,7 @@ class Request
     {
         $this->parseRequest();
 
-        return $this->requestData;
+        return json_decode($this->requestData, true);
     }
 
     /**
@@ -84,7 +84,7 @@ class Request
         }
 
         $this->setData(
-            call_user_func(
+                call_user_func(
                 [
                     $this,
                     'parse' . $this->requestTypesMap[$this->requestType] . 'Data'
@@ -104,10 +104,10 @@ class Request
 
     /**
      * Parse request json callback
-     * @return array
+     * @return string
      */
     private function parseJsonData()
     {
-        return json_decode($this->requestData, true);
+        return $this->requestData;
     }
 }
