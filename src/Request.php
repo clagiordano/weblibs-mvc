@@ -16,8 +16,8 @@ class Request
     private $requestTypesMap = [
         'GET' => 'Empty',
         'DELETE' => 'Empty',
-        'POST' => 'Json',
-        'PUT' => 'Json',
+        'POST' => 'Request',
+        'PUT' => 'Request',
         'HEAD' => 'Empty',
         'OPTIONS' => 'Empty',
         'PATCH' => 'Empty',
@@ -44,7 +44,7 @@ class Request
     {
         $this->parseRequest();
 
-        return json_decode($this->requestData, true);
+        return $this->requestData;
     }
 
     /**
@@ -103,11 +103,15 @@ class Request
     }
 
     /**
-     * Parse request json callback
-     * @return string
+     * Parse request data callback
+     * @return array
      */
-    private function parseJsonData()
+    private function parseRequestData()
     {
+        if (!is_array($this->requestData)) {
+            $this->setData(json_decode($this->requestData, true));
+        }
+
         return $this->requestData;
     }
 }
