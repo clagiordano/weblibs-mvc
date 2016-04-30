@@ -18,6 +18,9 @@ abstract class Controller
     /** @var Application $application */
     protected $application;
 
+    /** @var Request $application */
+    protected $request = null;
+
     /**
      *
      * @param clagiordano\weblibs\mvc\Application $application
@@ -26,6 +29,10 @@ abstract class Controller
     public function __construct(Application $application)
     {
         $this->application = $application;
+
+        $this->request = new Request();
+
+        $this->application->getTemplate()->requestData = $this->request->getData();
     }
 
     /**
