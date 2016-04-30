@@ -10,6 +10,7 @@ use clagiordano\weblibs\mvc\Registry;
  */
 class RegistryTest extends \PHPUnit_Framework_TestCase
 {
+    /** Registry $registry */
     private $registry = null;
 
     public function setUp()

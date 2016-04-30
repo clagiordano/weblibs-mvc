@@ -16,7 +16,7 @@ class Registry
     /**
      * @return clagiordano\weblibs\mvc\Registry
      */
-    public function __constructor()
+    public function __construct()
     {
         return $this;
     }
