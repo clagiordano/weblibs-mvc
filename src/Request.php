@@ -93,11 +93,19 @@ class Request
         );
     }
 
+    /**
+     * Parse request empty callback
+     * @return null
+     */
     private function parseEmptyData()
     {
         return null;
     }
 
+    /**
+     * Parse request json callback
+     * @return array
+     */
     private function parseJsonData()
     {
         return json_decode($this->requestData, true);
