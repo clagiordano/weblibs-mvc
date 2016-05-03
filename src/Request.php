@@ -104,19 +104,19 @@ class Request
     }
 
     /**
-     * Parse request empty callback
+     * Internal callback to parse empty requests
      * @return null
      */
-    private function parseEmptyData()
+    protected function parseEmptyData()
     {
         return null;
     }
 
     /**
-     * Parse request data callback
+     * * Internal callback to parse requests with data
      * @return array
      */
-    private function parseRequestData()
+    protected function parseRequestData()
     {
         if (!is_array($this->requestData)) {
             $this->setData(json_decode($this->requestData, true));

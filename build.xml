@@ -275,7 +275,7 @@
     <arg value="--offline"/>
     <arg value="--report-html"/>
     <arg value="build/metrics.html"/>
-    <arg value="."/>
+    <arg value="src/"/>
   </exec>
 
   <property name="phpmetrics.done" value="true"/>
