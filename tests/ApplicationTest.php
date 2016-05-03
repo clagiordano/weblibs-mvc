@@ -169,7 +169,9 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidController()
     {
+        ob_start();
         $this->application->getRouter()->loader('invalid');
+        ob_end_clean();
     }
 
     public function testInvalidAction()

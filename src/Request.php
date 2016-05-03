@@ -65,12 +65,22 @@ class Request
     }
 
     /**
+     * Returns requests type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->requestType;
+    }
+
+    /**
      * Parse and sets requestType and requestData proprerties after parsing.
      */
     private function parseRequest()
     {
         if (is_null($this->requestType)) {
-            $this->requestType = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
+            $this->setType(filter_input(INPUT_SERVER, 'REQUEST_METHOD'));
         }
 
         if (!isset($this->requestTypesMap[$this->requestType])) {

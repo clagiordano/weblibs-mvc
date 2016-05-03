@@ -10,7 +10,7 @@ use clagiordano\weblibs\mvc\Request;
  */
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
-    /** Request $registry */
+    /** @var Request $registry */
     private $request = null;
 
     public function setUp()
@@ -21,6 +21,27 @@ class RequestTest extends \PHPUnit_Framework_TestCase
             'clagiordano\weblibs\mvc\Request',
             $this->request
         );
+    }
+
+    /**
+     * @group settype
+     * @return
+     */
+    public function testSetType()
+    {
+        $this->expectException('\InvalidArgumentException');
+        $this->request->setType("InvalidType");
+    }
+
+    /**
+     * @group gettype
+     * @return
+     */
+    public function testGetType()
+    {
+        $this->request->setType("GET");
+
+        $this->assertEquals("GET", $this->request->getType());
     }
 
     /**
@@ -128,6 +149,58 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->request->setData(
             json_encode($testData)
         );
+
+        $this->assertEquals(
+            null,
+            $this->request->getData()
+        );
+    }
+
+    /**
+     * @group dynamicrequest
+     * @return
+     */
+    public function testDynamicRequest()
+    {
+        $testData = ['test' => 'value'];
+
+        $this->request->setData(
+            json_encode($testData)
+        );
+
+        $this->assertEquals(
+            null,
+            $this->request->getData()
+        );
+    }
+
+    /**
+     * @group invalidrequest
+     * @return
+     */
+    public function testInvalidRequest()
+    {
+        /**
+         * Normal request setup with data
+         */
+        $testData = ['test' => 'value'];
+
+        $this->request->setData(
+            json_encode($testData)
+        );
+
+        /**
+         * Force by reflection internal property to test throw
+         */
+        $class = new \ReflectionClass($this->request);
+        $property = $class->getProperty('requestType');
+        $property->setAccessible(true);
+        $property->setValue($this->request, "INVALIDREQUEST");
+
+        /**
+         * Now we expect exception!
+         */
+         $this->expectException('InvalidArgumentException');
 
         $this->assertEquals(
             null,
