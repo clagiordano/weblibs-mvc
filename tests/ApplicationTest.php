@@ -69,7 +69,7 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
     public function testSetInvalidPath()
     {
-        $this->expectException('InvalidArgumentException');
+        $this->setExpectedException('InvalidArgumentException');
         $this->application->getRouter()->setControllersPath('/controllers');
     }
 

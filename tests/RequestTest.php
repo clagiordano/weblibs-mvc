@@ -29,7 +29,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetType()
     {
-        $this->expectException('\InvalidArgumentException');
+        $this->setExpectedException('\InvalidArgumentException');
         $this->request->setType("InvalidType");
     }
 
@@ -200,7 +200,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         /**
          * Now we expect exception!
          */
-         $this->expectException('InvalidArgumentException');
+         $this->setExpectedException('InvalidArgumentException');
 
         $this->assertEquals(
             null,
