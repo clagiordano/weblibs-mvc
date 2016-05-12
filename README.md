@@ -9,32 +9,10 @@ This component can have a RESTful support simply adding an *.htaccess* file, see
 Based on http://php-html.net/tutorials/model-view-controller-in-php/<br />
 Based on http://phpro.org/tutorials/Model-View-Controller-MVC.html#9
 
-## Installation
-The recommended way to install weblibs-mvc is through [Composer](https://getcomposer.org).
-```bash
-composer require clagiordano/weblibs-mvc
-```
-
-### Adding RESTful support to destination project
-Simply add into yours project root a file named ***.htaccess*** <br />
-*(webserver must be allow override)* which contains the following lines:
-```apacheconf
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?rt=$1 [L,QSA]
-```
-
-this simple steps allow your application make RESTful calls like:
-
-```http
-http://www.example.com/clients/68563
-http://www.example.com/access/login
-http://www.example.com/chart/
-http://www.example.com/products/6574
-```
-
 ## Description of the main components
+
+## Application
+The application class is the main component wich handle and relates components between them.
 
 ### Controller
 The Controller is the C in MVC.
@@ -63,6 +41,72 @@ separation of HTML and PHP.
 Remember, PHP is an embeddable scripting language.
 This is the sort of task it is designed for and makes an efficient
 templating language. The template files belong in the views directory.
+
+## Installation
+The recommended way to install weblibs-mvc is through [Composer](https://getcomposer.org).
+```bash
+composer require clagiordano/weblibs-mvc
+```
+
+### Adding RESTful support to destination project
+Simply add into yours project root a file named ***.htaccess*** <br />
+*(webserver must be allow override)* which contains the following lines:
+```apacheconf
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?rt=$1 [L,QSA]
+```
+
+this simple steps allow your application make RESTful calls like:
+
+```http
+http://www.example.com/clients/68563
+http://www.example.com/access/login
+http://www.example.com/chart/
+http://www.example.com/products/6574
+```
+
+## Usage
+
+```php
+/**
+ * Composer autoload
+ */
+require_once __DIR__ . '/vendor/autoload.php';
+
+/**
+ * Init base application
+ * @var Application $application
+ */
+$application = new Application();
+
+/**
+ * Router setup
+ */
+$application->setRouter(
+    new Router($application)
+);
+
+/**
+ * set the path to the controllers directory
+ */
+$application->getRouter()->setControllersPath(
+    __DIR__ . '/controllers'
+);
+
+/**
+ * Template setup
+ */
+$application->setTemplate(
+    new Template($application)
+);
+
+/**
+ * load the controller / run the application
+ */
+$application->getRouter()->loader();
+```
 
 ## Legal
 *Copyright (C) Claudio Giordano <claudio.giordano@autistici.org>*
