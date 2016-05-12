@@ -18,7 +18,7 @@ composer require clagiordano/weblibs-mvc
 ### Adding RESTful support to destination project
 Simply add into yours project root a file named ***.htaccess*** <br />
 *(webserver must be allow override)* which contains the following lines:
-```http
+```apacheconf
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
