@@ -16,8 +16,11 @@ class Router
     protected $application;
     /** @var string $path controller path */
     private $controllersPath;
+    /** @var array $args */
     private $args = [];
+    /** @var string $controllerFile */
     public $controllerFile;
+    /** @var string $controller */
     public $controller;
     /** @var string $controllerAction */
     public $controllerAction;
