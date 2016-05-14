@@ -76,14 +76,10 @@ class Router
     }
 
     /**
-     * load the controller
+     * Load the controller and perform call action
      */
     public function loader($route = null)
     {
-        /**
-         * check the route
-         */
-
         /**
          * get the route from the url
          */
@@ -194,7 +190,7 @@ class Router
          * Check last args and unset if empty
          */
         if (trim($argsList[$argsListCount - 1]) == "") {
-            // Invalid arg detected and removed
+            // Invalid argument detected and removed
             unset($argsList[$argsListCount - 1]);
         }
 
@@ -243,11 +239,17 @@ class Router
         }
     }
 
+    /**
+     * Returns selected controller base name
+     */
     public function getController()
     {
         return $this->controller;
     }
 
+    /**
+     * Returns selected controller action name
+     */
     public function getAction()
     {
         return $this->controllerAction;
