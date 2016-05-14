@@ -10,9 +10,16 @@ class Request
 {
     /** @var array $requestData */
     private $requestData = null;
-    /** @var string $requestType */
+
+    /**
+     * @var string $requestType
+     */
     private $requestType = null;
 
+    /**
+     * Relate request type with callback function
+     * @var array $requestTypesMap
+     */
     private $requestTypesMap = [
         'GET' => 'Empty',
         'DELETE' => 'Empty',
