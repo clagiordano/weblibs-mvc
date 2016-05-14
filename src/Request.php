@@ -18,6 +18,7 @@ class Request
 
     /**
      * Relate request type with callback function
+     *
      * @var array $requestTypesMap
      */
     private $requestTypesMap = [
@@ -32,6 +33,8 @@ class Request
     ];
 
     /**
+     * Sets requst data array manually
+     *
      * @param array $requestData
      * @return \clagiordano\weblibs\mvc\Request
      */
@@ -55,7 +58,7 @@ class Request
     }
 
     /**
-     * Sets requests type
+     * Sets requests type manually
      *
      * @param string $requestType
      * @return
@@ -101,7 +104,7 @@ class Request
         }
 
         $this->setData(
-                call_user_func(
+            call_user_func(
                 [
                     $this,
                     'parse' . $this->requestTypesMap[$this->requestType] . 'Data'
@@ -120,7 +123,7 @@ class Request
     }
 
     /**
-     * * Internal callback to parse requests with data
+     * Internal callback to parse requests with data
      * @return array
      */
     protected function parseRequestData()
