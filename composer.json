@@ -4,10 +4,12 @@
     "type": "library",
     "homepage": "https://github.com/clagiordano/weblibs-mvc.git",
     "license": "LGPL-3.0",
+    "keywords": ["clagiordano", "weblibs", "mvc", "routing", "framework", "api", "restful"],
     "authors": [
         {
             "name": "Claudio Giordano",
-            "email": "claudio.giordano@autistici.org"
+            "email": "claudio.giordano@autistici.org",
+            "role": "Developer"
         }
     ],
     "require": {
