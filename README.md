@@ -76,6 +76,14 @@ http://www.example.com/products/6574
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
+ * Import required classes
+ */
+use clagiordano\weblibs\mvc\Application;
+use clagiordano\weblibs\mvc\Registry;
+use clagiordano\weblibs\mvc\Router;
+use clagiordano\weblibs\mvc\Template;
+
+/**
  * Init base application
  * @var Application $application
  */
