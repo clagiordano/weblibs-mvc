@@ -32,6 +32,7 @@ abstract class Controller
 
         $this->request = new Request();
 
+        $this->application->getRegistry()->requestType = $this->request->getType();
         $this->application->getRegistry()->requestData = $this->request->getData();
     }
 

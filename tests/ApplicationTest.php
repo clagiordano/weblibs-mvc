@@ -8,7 +8,7 @@ use clagiordano\weblibs\mvc\Router;
 use clagiordano\weblibs\mvc\Template;
 
 /**
- * Class MapperTest
+ * Class ApplicationTest
  * @package clagiordano\weblibs\dbabstraction\tests
  */
 class ApplicationTest extends \PHPUnit_Framework_TestCase
