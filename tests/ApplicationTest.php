@@ -189,8 +189,36 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->application->getRouter()->loader('sample/index/aaa/bbb/');
     }
 
+    /**
+     * @group testarguments
+     */
     public function testGetArguments()
     {
-        $this->application->getRouter()->loader('sample/test');
+        $this->application->getRouter()->loader();
+
+        ob_start();
+        $this->application->getRouter()->loader('sample/test/aaa');
+        echo "\n";
+
+        $this->application->getRouter()->loader('sample/test/aaa/bbb');
+        echo "\n";
+
+        $this->application->getRouter()->loader('sample/test/aaa/bbb/ccc');
+        echo "\n";
+
+        $this->application->getRouter()->loader('sample/test/aaa/bbb/ccc?ddd=eee');
+        echo "\n";
+
+        $this->application->getRouter()->loader('sample/test/aaa/bbb/ccc/?ddd=eee');
+        echo "\n";
+
+        $this->application->getRouter()->loader('sample/testargs/aaa/bbb/ccc/?ddd=eee');
+        echo "\n";
+
+        $out = ob_get_clean();
+        // old output = [["aaa","bbb","ccc"]]
+        // new output = ["aaa","bbb","ccc"]
+
+        //var_dump($out);
     }
 }

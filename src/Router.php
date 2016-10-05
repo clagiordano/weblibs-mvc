@@ -21,8 +21,8 @@ class Router
     protected $application;
     /** @var string $path controller path */
     protected $controllersPath;
-    /** @var array $args */
-    protected $args = [];
+    /** @var array $controllerActionArgs */
+    protected $controllerActionArgs = [];
     /** @var string $controllerFile */
     protected $controllerFile;
     /** @var string $controller */
@@ -126,11 +126,22 @@ class Router
      */
     private function callControllerAction()
     {
-        if (!$this->args) {
-            return $this->controllerClass->{$this->controllerAction}();
+        if (!$this->controllerActionArgs) {
+            return call_user_func(
+                [
+                    $this->controllerClass,
+                    $this->controllerAction
+                ]
+            );
         }
         
-        return $this->controllerClass->{$this->controllerAction}($this->args);
+        return call_user_func_array(
+            [
+                $this->controllerClass,
+                $this->controllerAction
+            ],
+            $this->controllerActionArgs
+        );
     }
 
     /**
@@ -158,24 +169,28 @@ class Router
         /**
          * Check for multi part route
          */
-        if (strpos($route, '/') > 0) {
-            $parts = explode('/', $route);
+        $routeComponents = parse_url($route);
+        if (isset($routeComponents['path'])
+            && (strpos($routeComponents['path'], '/') > 0)) {
+            $routeParts = explode('/', $routeComponents['path']);
+            $this->controller = ucfirst($routeParts[0]);
 
-            $this->controller = ucfirst($parts[0]);
+            /**
+             * Shift element off the beginning of array
+             */
+            array_shift($routeParts);
+            $this->controllerAction = $routeParts[0];
 
-            // Shift element off the beginning of array
-            array_shift($parts);
-
-            $this->controllerAction = $parts[0];
-
-            // Shift element off the beginning of array
-            array_shift($parts);
+            /**
+             * Shift element off the beginning of array
+             */
+            array_shift($routeParts);
 
             /**
              * Get optional residual args
              */
-            if (count($parts) > 0) {
-                $this->parseArgs($parts);
+            if (count($routeParts) > 0) {
+                $this->parseArgs($routeParts);
             }
         }
 
@@ -194,30 +209,21 @@ class Router
     private function parseArgs($argsList = [])
     {
         $argsListCount = count($argsList);
+
         /**
          * Check last args and unset if empty
          */
         if (trim($argsList[$argsListCount - 1]) == "") {
-            // Invalid argument detected and removed
+            /**
+             * Invalid argument detected and removed
+             */
             unset($argsList[$argsListCount - 1]);
         }
 
-        if (($argsListCount % 2) != 0) {
-            /**
-             * I consider them as arguments list
-             */
-            $this->args = $argsList;
-
-            return;
-        }
-
         /**
-         * if the arguments are odd, I consider them as key => value pairs
+         * All residual args will be prepared for use as action argument
          */
-        for ($i = 0; $i < $argsListCount; $i++) {
-            $this->args[$argsList[$i]] = $argsList[($i + 1)];
-            $i++;
-        }
+         $this->controllerActionArgs = $argsList;
     }
 
     /**
