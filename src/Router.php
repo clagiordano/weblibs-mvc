@@ -12,18 +12,23 @@ namespace clagiordano\weblibs\mvc;
  */
 class Router
 {
+    /**
+     * @const string CONTROLLER_CLASS_SUFFIX suffix string for controller file
+     */
+    const CONTROLLER_CLASS_SUFFIX = 'Controller';
+
     /** @var Application $application */
     protected $application;
     /** @var string $path controller path */
-    private $controllersPath;
+    protected $controllersPath;
     /** @var array $args */
-    private $args = [];
+    protected $args = [];
     /** @var string $controllerFile */
-    public $controllerFile;
+    protected $controllerFile;
     /** @var string $controller */
-    public $controller;
+    protected $controller;
     /** @var string $controllerAction */
-    public $controllerAction;
+    protected $controllerAction;
 
     /**
      *
@@ -31,14 +36,6 @@ class Router
      */
     public function __construct(Application $application)
     {
-        $registerStatus = spl_autoload_register([$this, 'autoloadController']);
-
-        if (!$registerStatus) {
-            throw new \RuntimeException(
-                __METHOD__ . ": Failed spl_autoload_register!"
-            );
-        }
-
         $this->application = $application;
     }
 
@@ -105,9 +102,10 @@ class Router
         }
 
         /**
-         * a new controller class instance
+         * Autoload and create a new controller class instance
          */
-        $class = ucfirst($this->controller . 'Controller');
+        $class = ucfirst($this->controller . self::CONTROLLER_CLASS_SUFFIX);
+        $this->autoloadController($class);
         $controller = new $class($this->application);
 
         /**
@@ -213,28 +211,26 @@ class Router
     }
 
     /**
+     * Load class file from disk and check for class existence
      *
      * @param string $controllerClass
      */
     public function autoloadController($controllerClass)
     {
         if ($controllerClass) {
-            set_include_path($this->getControllersPath());
-            spl_autoload($controllerClass);
+            $classFilePath = "{$this->getControllersPath()}/{$controllerClass}.php";
 
-            $classPath = $this->getControllersPath() . "/" .  $controllerClass . ".php";
-            if (!file_exists($classPath)) {
-                throw new \InvalidArgumentException(
-                    __METHOD__ . ": Invalid class path '{$classPath}'!"
-                );
-            }
+            /**
+             * If class file exists and class not loaded, load file from disk
+             */
+            if (file_exists($classFilePath) && !class_exists($controllerClass)) {
+                require_once $classFilePath;
 
-            require_once $classPath;
-
-            if (!class_exists($controllerClass)) {
-                throw new \RuntimeException(
-                    __METHOD__ . ": Failed autoload for class '{$controllerClass}'!"
-                );
+                if (!class_exists($controllerClass)) {
+                    throw new \RuntimeException(
+                        __METHOD__ . ": Failed autoload for class '{$controllerClass}'!"
+                    );
+                }
             }
         }
     }
