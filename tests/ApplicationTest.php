@@ -227,9 +227,32 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParams()
     {
-        // api/getProducts/type/1/category/3/show/0,20
+        ob_start();
         $this->application->getRouter()->loader(
-            'sample/testparams/pippo/?type=1&category=3&show=0,20'
+            'sample/testparams/?type=1&category=3&show=0,20'
+        );
+        $out = ob_get_clean();
+
+        $this->assertEquals(
+            $out,
+            '[{"type":"1","category":"3","show":"0,20"}]'
+        );
+    }
+
+    /**
+     * @group testparams
+     */
+    public function testGetParams2()
+    {
+        ob_start();
+        $this->application->getRouter()->loader(
+            'sample/testparams/test?type=1&category=3&show=0,20'
+        );
+        $out = ob_get_clean();
+        
+        $this->assertEquals(
+            $out,
+            '["test",{"type":"1","category":"3","show":"0,20"}]'
         );
     }
 }

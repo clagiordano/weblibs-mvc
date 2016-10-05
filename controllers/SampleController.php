@@ -31,6 +31,6 @@ class SampleController extends Controller
 
     public function testparams()
     {
-        print_r(func_get_args());
+        echo json_encode(func_get_args());
     }
 }

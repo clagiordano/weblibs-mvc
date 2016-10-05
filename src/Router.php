@@ -126,8 +126,6 @@ class Router
      */
     private function callControllerAction()
     {
-        var_dump($this->controllerActionArgs);
-
         if (!$this->controllerActionArgs) {
             return call_user_func(
                 [
