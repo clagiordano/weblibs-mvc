@@ -29,6 +29,8 @@ class Router
     protected $controller;
     /** @var string $controllerAction */
     protected $controllerAction;
+    /** @var mixed $controllerClass controller class instance */
+    protected $controllerClass = null;
 
     /**
      *
@@ -106,21 +108,29 @@ class Router
          */
         $class = ucfirst($this->controller . self::CONTROLLER_CLASS_SUFFIX);
         $this->autoloadController($class);
-        $controller = new $class($this->application);
+        $this->controllerClass = new $class($this->application);
 
         /**
          * check if the action is callable
          */
-        $action = $this->controllerAction;
-        if (is_callable([$controller, $this->controllerAction]) === false) {
-            $action = 'index';
+        if (is_callable([$this->controllerClass, $this->controllerAction]) === false) {
+            $this->controllerAction = 'index';
         }
 
-        /**
-         * run the action and supply optional args to called action
-         * as arguments if present.
-         */
-        $controller->$action($this->args);
+        return $this->callControllerAction();
+    }
+
+    /**
+     * run the action and supply optional args to called action
+     * as arguments if present.
+     */
+    private function callControllerAction()
+    {
+        if (!$this->args) {
+            return $this->controllerClass->{$this->controllerAction}();
+        }
+        
+        return $this->controllerClass->{$this->controllerAction}($this->args);
     }
 
     /**

@@ -188,4 +188,9 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         $this->application->getRouter()->loader('sample/index/aaa/bbb/');
     }
+
+    public function testGetArguments()
+    {
+        $this->application->getRouter()->loader('sample/test');
+    }
 }

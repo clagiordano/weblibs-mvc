@@ -17,4 +17,9 @@ class SampleController extends Controller
         /** load the index template */
         $this->application->getTemplate()->show('sample');
     }
+
+    public function test()
+    {
+        echo json_encode(func_get_args());
+    }
 }
