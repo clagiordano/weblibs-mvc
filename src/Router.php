@@ -126,6 +126,8 @@ class Router
      */
     private function callControllerAction()
     {
+        var_dump($this->controllerActionArgs);
+
         if (!$this->controllerActionArgs) {
             return call_user_func(
                 [
@@ -190,8 +192,12 @@ class Router
              * Get optional residual args
              */
             if (count($routeParts) > 0) {
-                $this->parseArgs($routeParts);
+                $this->parseRoutePath($routeParts);
             }
+        }
+
+        if (isset($routeComponents['query'])) {
+            $this->parseQuery($routeComponents['query']);
         }
 
         /**
@@ -206,7 +212,7 @@ class Router
      *
      * @param array $argsList array with residual route args
      */
-    private function parseArgs($argsList = [])
+    private function parseRoutePath($argsList = [])
     {
         $argsListCount = count($argsList);
 
@@ -224,6 +230,21 @@ class Router
          * All residual args will be prepared for use as action argument
          */
          $this->controllerActionArgs = $argsList;
+    }
+
+    /**
+     * Parse query string parameters and append as associative array to
+     * controller action arguments
+     */
+    private function parseQuery($stringParams)
+    {
+        $queryParams = explode('&', $stringParams);
+
+        foreach ($queryParams as $param) {
+            list($key, $value) = explode('=', $param);
+            
+            $this->controllerActionArgs['filters'][$key] = $value;
+        }
     }
 
     /**

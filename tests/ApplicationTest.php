@@ -221,4 +221,15 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
 
         //var_dump($out);
     }
+
+    /**
+     * @group testparams
+     */
+    public function testGetParams()
+    {
+        // api/getProducts/type/1/category/3/show/0,20
+        $this->application->getRouter()->loader(
+            'sample/testparams/pippo/?type=1&category=3&show=0,20'
+        );
+    }
 }

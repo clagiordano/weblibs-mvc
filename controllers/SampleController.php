@@ -28,4 +28,9 @@ class SampleController extends Controller
         echo "Foo: $foo\n";
         echo json_encode(func_get_args());
     }
+
+    public function testparams()
+    {
+        print_r(func_get_args());
+    }
 }
