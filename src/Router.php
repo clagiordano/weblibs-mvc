@@ -16,6 +16,10 @@ class Router
      * @const string CONTROLLER_CLASS_SUFFIX suffix string for controller file
      */
     const CONTROLLER_CLASS_SUFFIX = 'Controller';
+    /**
+     * @const string ROUTING_GET_KEY array key to get for route calculation
+     */
+    const ROUTING_GET_KEY = 'rt';
 
     /** @var Application $application */
     protected $application;
@@ -31,6 +35,8 @@ class Router
     protected $controllerAction;
     /** @var mixed $controllerClass controller class instance */
     protected $controllerClass = null;
+    /** @var string $querystring */
+    protected $querystring = null;
 
     /**
      *
@@ -85,11 +91,7 @@ class Router
         if (is_null($route)) {
             $route = filter_input(
                 INPUT_GET,
-                'rt',
-                FILTER_SANITIZE_URL,
-                [
-                    'default' => 'index'
-                ]
+                self::ROUTING_GET_KEY
             );
         }
 
@@ -170,6 +172,10 @@ class Router
          * Check for multi part route
          */
         $routeComponents = parse_url($route);
+        if (isset($routeComponents['query'])) {
+            $this->querystring = $routeComponents['query'];
+        }
+
         if (isset($routeComponents['path'])
             && (strpos($routeComponents['path'], '/') > 0)) {
             $routeParts = explode('/', $routeComponents['path']);
@@ -194,9 +200,7 @@ class Router
             }
         }
 
-        if (isset($routeComponents['query'])) {
-            $this->parseQuery($routeComponents['query']);
-        }
+        $this->parseQueryString();
 
         /**
          * set the file path
@@ -234,13 +238,32 @@ class Router
      * Parse query string parameters and append as associative array to
      * controller action arguments
      */
-    private function parseQuery($stringParams)
+    private function parseQueryString()
     {
-        $queryParams = explode('&', $stringParams);
+        $queryParams = [];
 
-        foreach ($queryParams as $param) {
-            list($key, $value) = explode('=', $param);
-            
+        /**
+         * Drop useless routing part
+         */
+        $route = filter_input(INPUT_GET, self::ROUTING_GET_KEY);
+        if ($route) {
+            unset($_GET[self::ROUTING_GET_KEY]);
+        }
+
+        if (count($_GET) > 0) {
+            $queryParams = $_GET;
+        } elseif (isset($this->querystring)) {
+            $params = explode('&', $this->querystring);
+            foreach ($params as $param) {
+                list($key, $value) = explode('=', $param);
+                $queryParams[$key] = $value;
+            }
+        }
+
+        /**
+         * Prepare additional arguments
+         */
+        foreach ($queryParams as $key => $value) {
             $this->controllerActionArgs['filters'][$key] = $value;
         }
     }
