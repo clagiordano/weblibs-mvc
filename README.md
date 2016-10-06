@@ -55,8 +55,7 @@ Simply add into yours project root a file named ***.htaccess*** <br />
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?rt=$1 [L,QSA]
-RewriteRule ^(.*)\?(.*)$ index.php?rt=$1?%{QUERY_STRING} [L,QSA]
+RewriteRule ^(.*)$ index.php?rt=$1?%{QUERY_STRING} [L,QSL]
 ```
 
 this simple steps allow your application make RESTful calls like:
