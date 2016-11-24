@@ -22,4 +22,15 @@ class SampleController extends Controller
     {
         echo json_encode(func_get_args());
     }
+
+    public function testargs($foo, $bar, $baz)
+    {
+        echo "Foo: $foo\n";
+        echo json_encode(func_get_args());
+    }
+
+    public function testparams()
+    {
+        echo json_encode(func_get_args());
+    }
 }

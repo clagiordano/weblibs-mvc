@@ -16,13 +16,17 @@ class Router
      * @const string CONTROLLER_CLASS_SUFFIX suffix string for controller file
      */
     const CONTROLLER_CLASS_SUFFIX = 'Controller';
+    /**
+     * @const string ROUTING_GET_KEY array key to get for route calculation
+     */
+    const ROUTING_GET_KEY = 'rt';
 
     /** @var Application $application */
     protected $application;
     /** @var string $path controller path */
     protected $controllersPath;
-    /** @var array $args */
-    protected $args = [];
+    /** @var array $controllerActionArgs */
+    protected $controllerActionArgs = [];
     /** @var string $controllerFile */
     protected $controllerFile;
     /** @var string $controller */
@@ -31,6 +35,8 @@ class Router
     protected $controllerAction;
     /** @var mixed $controllerClass controller class instance */
     protected $controllerClass = null;
+    /** @var string $querystring */
+    protected $querystring = null;
 
     /**
      *
@@ -85,11 +91,7 @@ class Router
         if (is_null($route)) {
             $route = filter_input(
                 INPUT_GET,
-                'rt',
-                FILTER_SANITIZE_URL,
-                [
-                    'default' => 'index'
-                ]
+                self::ROUTING_GET_KEY
             );
         }
 
@@ -126,11 +128,22 @@ class Router
      */
     private function callControllerAction()
     {
-        if (!$this->args) {
-            return $this->controllerClass->{$this->controllerAction}();
+        if (!$this->controllerActionArgs) {
+            return call_user_func(
+                [
+                    $this->controllerClass,
+                    $this->controllerAction
+                ]
+            );
         }
         
-        return $this->controllerClass->{$this->controllerAction}($this->args);
+        return call_user_func_array(
+            [
+                $this->controllerClass,
+                $this->controllerAction
+            ],
+            $this->controllerActionArgs
+        );
     }
 
     /**
@@ -158,26 +171,36 @@ class Router
         /**
          * Check for multi part route
          */
-        if (strpos($route, '/') > 0) {
-            $parts = explode('/', $route);
+        $routeComponents = parse_url($route);
+        if (isset($routeComponents['query'])) {
+            $this->querystring = $routeComponents['query'];
+        }
 
-            $this->controller = ucfirst($parts[0]);
+        if (isset($routeComponents['path'])
+            && (strpos($routeComponents['path'], '/') > 0)) {
+            $routeParts = explode('/', $routeComponents['path']);
+            $this->controller = ucfirst($routeParts[0]);
 
-            // Shift element off the beginning of array
-            array_shift($parts);
+            /**
+             * Shift element off the beginning of array
+             */
+            array_shift($routeParts);
+            $this->controllerAction = $routeParts[0];
 
-            $this->controllerAction = $parts[0];
-
-            // Shift element off the beginning of array
-            array_shift($parts);
+            /**
+             * Shift element off the beginning of array
+             */
+            array_shift($routeParts);
 
             /**
              * Get optional residual args
              */
-            if (count($parts) > 0) {
-                $this->parseArgs($parts);
+            if (count($routeParts) > 0) {
+                $this->parseRoutePath($routeParts);
             }
         }
+
+        $this->parseQueryString();
 
         /**
          * set the file path
@@ -191,32 +214,57 @@ class Router
      *
      * @param array $argsList array with residual route args
      */
-    private function parseArgs($argsList = [])
+    private function parseRoutePath($argsList = [])
     {
         $argsListCount = count($argsList);
+
         /**
          * Check last args and unset if empty
          */
         if (trim($argsList[$argsListCount - 1]) == "") {
-            // Invalid argument detected and removed
+            /**
+             * Invalid argument detected and removed
+             */
             unset($argsList[$argsListCount - 1]);
         }
 
-        if (($argsListCount % 2) != 0) {
-            /**
-             * I consider them as arguments list
-             */
-            $this->args = $argsList;
+        /**
+         * All residual args will be prepared for use as action argument
+         */
+         $this->controllerActionArgs = $argsList;
+    }
 
-            return;
+    /**
+     * Parse query string parameters and append as associative array to
+     * controller action arguments
+     */
+    private function parseQueryString()
+    {
+        $queryParams = [];
+
+        /**
+         * Drop useless routing part
+         */
+        $route = filter_input(INPUT_GET, self::ROUTING_GET_KEY);
+        if ($route) {
+            unset($_GET[self::ROUTING_GET_KEY]);
+        }
+
+        if (count($_GET) > 0) {
+            $queryParams = $_GET;
+        } elseif (isset($this->querystring)) {
+            $params = explode('&', $this->querystring);
+            foreach ($params as $param) {
+                list($key, $value) = explode('=', $param);
+                $queryParams[$key] = $value;
+            }
         }
 
         /**
-         * if the arguments are odd, I consider them as key => value pairs
+         * Prepare additional arguments
          */
-        for ($i = 0; $i < $argsListCount; $i++) {
-            $this->args[$argsList[$i]] = $argsList[($i + 1)];
-            $i++;
+        foreach ($queryParams as $key => $value) {
+            $this->controllerActionArgs['filters'][$key] = $value;
         }
     }
 
