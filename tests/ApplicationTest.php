@@ -229,13 +229,13 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     {
         ob_start();
         $this->application->getRouter()->loader(
-            'sample/testparams/?type=1&category=3&show=0,20'
+            'sample/testparams?type=1&category=3&show=0,20'
         );
         $out = ob_get_clean();
 
         $this->assertEquals(
-            $out,
-            '[{"type":"1","category":"3","show":"0,20"}]'
+            '[{"type":"1","category":"3","show":"0,20"}]',
+            $out
         );
     }
 
@@ -251,8 +251,8 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
         $out = ob_get_clean();
         
         $this->assertEquals(
-            $out,
-            '["test",{"type":"1","category":"3","show":"0,20"}]'
+            '["test",{"type":"1","category":"3","show":"0,20"}]',
+            $out
         );
     }
 }
