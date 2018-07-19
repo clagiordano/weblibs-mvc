@@ -14,11 +14,9 @@ namespace clagiordano\weblibs\mvc;
 class Registry
 {
     /**
-     * @return clagiordano\weblibs\mvc\Registry
      */
     public function __construct()
     {
-        return $this;
     }
 
     /**

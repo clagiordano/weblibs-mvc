@@ -2,10 +2,6 @@
 
 namespace clagiordano\weblibs\mvc;
 
-use clagiordano\weblibs\mvc\Registry;
-use clagiordano\weblibs\mvc\Router;
-use clagiordano\weblibs\mvc\Template;
-
 /**
  * This is the main application class which handle other components.
  */
