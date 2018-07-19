@@ -61,7 +61,6 @@ class Request
      * Sets requests type manually
      *
      * @param string $requestType
-     * @return
      */
     public function setType($requestType)
     {

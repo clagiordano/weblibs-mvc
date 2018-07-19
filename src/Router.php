@@ -82,6 +82,8 @@ class Router
 
     /**
      * Load the controller and perform call action
+     * @param null|string $route
+     * @return mixed
      */
     public function loader($route = null)
     {
@@ -98,7 +100,7 @@ class Router
         $this->parseRoute($route);
 
         /**
-         * if the file is not there diaf
+         * if the file is not there
          */
         if (is_readable($this->controllerFile) === false) {
             $this->controllerFile = $this->getControllersPath() . '/Error404.php';
@@ -150,6 +152,7 @@ class Router
      * Sets internal property file with the correct controller path.
      *
      * @access private
+     * @param string $route
      * @return void
      */
     private function parseRoute($route = 'index')

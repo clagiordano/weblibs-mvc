@@ -22,9 +22,7 @@ abstract class Controller
     protected $request = null;
 
     /**
-     *
-     * @param clagiordano\weblibs\mvc\Application $application
-     * @return clagiordano\weblibs\mvc\Controller
+     * @param Application $application
      */
     public function __construct(Application $application)
     {
