@@ -6,6 +6,7 @@ use clagiordano\weblibs\mvc\Application;
 //use clagiordano\weblibs\mvc\Router;
 use clagiordano\weblibs\configmanager\ConfigManager;
 use clagiordano\weblibs\mvc\Container;
+use stdClass;
 
 /**
  * Class ApplicationTest
@@ -70,10 +71,52 @@ class ApplicationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function canSetConfigurationInstanceToApp()
+    {
+        $config = new ConfigManager();
+        $config->setValue('test', 'value');
+
+        $this->application->setConfig($config);
+
+        self::assertInstanceOf(
+            'clagiordano\weblibs\configmanager\ConfigManager',
+            $this->application->getConfig()
+        );
+
+        self::assertSame(
+            $config,
+            $this->application->getConfig()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function canGetContainerInstanceFromApp()
     {
         self::assertInstanceOf(
             'clagiordano\weblibs\mvc\Container',
+            $this->application->getContainer()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function canSetContainerInstanceToApp()
+    {
+        $container = new Container();
+        $container->set('sampleService', new stdClass());
+
+        $this->application->setContainer($container);
+
+        self::assertInstanceOf(
+            'clagiordano\weblibs\mvc\Container',
+            $this->application->getContainer()
+        );
+
+        self::assertSame(
+            $container,
             $this->application->getContainer()
         );
     }
