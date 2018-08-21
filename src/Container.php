@@ -2,9 +2,11 @@
 
 namespace clagiordano\weblibs\mvc;
 
+use clagiordano\weblibs\mvc\exceptions\ContainerException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use clagiordano\weblibs\mvc\exceptions\NotFoundException;
 
 /**
  * Class Container
@@ -27,7 +29,16 @@ class Container implements ContainerInterface
      */
     public function get($id)
     {
-        // TODO: Implement get() method.
+        if ($this->has($id) === false) {
+            throw new NotFoundException("No entry was found for {$id} identifier");
+        }
+
+        $service = $this->containerStorage[$id];
+        if (!$service) {
+            throw new ContainerException('Error while retrieving the entry');
+        }
+
+        return $service;
     }
 
     /**
@@ -36,7 +47,7 @@ class Container implements ContainerInterface
      */
     public function set($id, $service)
     {
-
+        $this->containerStorage[$id] = $service;
     }
 
     /**
