@@ -2,82 +2,63 @@
 
 namespace clagiordano\weblibs\mvc;
 
+use clagiordano\weblibs\configmanager\ConfigManager;
+
 /**
- * This is the main application class which handle other components.
+ * Class Application, This is the main application class which handle other components.
+ * @package clagiordano\weblibs\mvc
  */
 class Application
 {
-    /** @var Registry $registry */
-    private $registry = null;
-    /** @var Router $router **/
-    private $router = null;
-    /** @var Template $template **/
-    private $template = null;
+    /** @var ConfigManager $config */
+    protected $config = null;
+    /** @var Container $container */
+    protected $container = null;
 
     /**
-     * @return \clagiordano\weblibs\mvc\Application
+     * Application constructor.
+     * @param ConfigManager|null $config
+     * @param Container|null $container
      */
-    public function __construct()
+    public function __construct(ConfigManager $config = null, Container $container = null)
     {
-        $this->setRegistry(new Registry());
+        $this->setConfig($config);
+        $this->setContainer($container);
+    }
 
+    /**
+     * @return ConfigManager
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
+     * @param ConfigManager $config
+     * @return Application
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
         return $this;
     }
 
     /**
-     * @param Router $router
-     * @return \clagiordano\weblibs\mvc\Application
+     * @return Container
      */
-    public function setRouter(Router $router)
+    public function getContainer()
     {
-        $this->router = $router;
+        return $this->container;
+    }
 
+    /**
+     * @param Container $container
+     * @return Application
+     */
+    public function setContainer(Container $container)
+    {
+        $this->container = $container;
         return $this;
-    }
-
-    /**
-     * @return \clagiordano\weblibs\mvc\Router
-     */
-    public function getRouter()
-    {
-        return $this->router;
-    }
-
-    /**
-     * @param Template $template
-     * @return \clagiordano\weblibs\mvc\Application
-     */
-    public function setTemplate(Template $template)
-    {
-        $this->template = $template;
-
-        return $this;
-    }
-
-    /**
-     * @return \clagiordano\weblibs\mvc\Template
-     */
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    /**
-     * @param Registry $registry
-     * @return \clagiordano\weblibs\mvc\Application
-     */
-    public function setRegistry(Registry $registry)
-    {
-        $this->registry = $registry;
-
-        return $this;
-    }
-
-    /**
-     * @return \clagiordano\weblibs\mvc\Registry
-     */
-    public function getRegistry()
-    {
-        return $this->registry;
     }
 }
