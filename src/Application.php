@@ -22,6 +22,14 @@ class Application
      */
     public function __construct(ConfigManager $config = null, Container $container = null)
     {
+        if ($config === null) {
+            $config = new ConfigManager();
+        }
+
+        if ($container === null) {
+            $container = new Container();
+        }
+
         $this->setConfig($config);
         $this->setContainer($container);
     }
@@ -38,7 +46,7 @@ class Application
      * @param ConfigManager $config
      * @return Application
      */
-    public function setConfig($config)
+    public function setConfig(ConfigManager $config)
     {
         $this->config = $config;
         return $this;
